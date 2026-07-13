@@ -3,15 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Karmazin Tattoo — тату-майстер у Вільногорську</title>
+<title>Karmazin Tattoo Studio</title>
 <meta name="description" id="meta-description" content="Авторські тату, чорна лінія, реалізм та ілюстративні сюжети у Вільногорську. Запис на сеанс у тату-студії Karmazin Tattoo.">
-<meta property="og:title" id="og-title" content="Karmazin Tattoo — тату-майстер у Вільногорську">
-<meta property="og:description" id="og-description" content="Авторські тату, чорна лінія, реалізм та ілюстративні сюжети у Вільногорську. Запис на сеанс у тату-студії Karmazin Tattoo.">
-<meta name="twitter:title" id="twitter-title" content="Karmazin Tattoo — тату-майстер у Вільногорську">
-<meta name="twitter:description" id="twitter-description" content="Авторські тату, чорна лінія, реалізм та ілюстративні сюжети у Вільногорську. Запис на сеанс у тату-студії Karmazin Tattoo.">
-<link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="robots" id="meta-robots" content="index, follow">
+<meta name="author" id="meta-author" content="Karmazin Tattoo Studio">
+<link rel="canonical" id="canonical-link" href="https://karmazin.netlify.app/">
+<meta property="og:title" id="og-title" content="Karmazin Tattoo Studio">
+<meta property="og:description" id="og-description" content="Авторське татуювання та індивідуальні ескізи.">
+<meta property="og:image" id="og-image" content="https://karmazin.netlify.app/og-image.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" id="og-url" content="https://karmazin.netlify.app/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" id="twitter-title" content="Karmazin Tattoo Studio">
+<meta name="twitter:description" id="twitter-description" content="Авторське татуювання">
+<meta name="twitter:image" id="twitter-image" content="https://karmazin.netlify.app/og-image.jpg">
+<script type="application/ld+json" id="schema-json"></script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Caveat:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -319,7 +328,7 @@
     <div class="wrap master">
       <div class="master-frame reveal">
         <div class="corner tl"></div><div class="corner br"></div>
-        <img src="images/master-at-work.jpg" alt="Майстер за роботою">
+        <img src="images/master-at-work.jpg" alt="Анатолій Кармазін працює над татуюванням у студії Karmazin Tattoo">
       </div>
       <div class="master-bio reveal">
         <div class="eyebrow">Майстер</div>
@@ -456,12 +465,25 @@ async function loadSiteContent(){
   const C = await loadSiteContent();
 
   const seo = C.seo || {};
-  document.title = seo.title || 'Karmazin Tattoo — тату-майстер у Вільногорську';
+  document.title = seo.title || 'Karmazin Tattoo Studio';
   document.getElementById('meta-description').content = seo.description || '';
-  document.getElementById('og-title').content = seo.title || document.title;
-  document.getElementById('og-description').content = seo.description || '';
-  document.getElementById('twitter-title').content = seo.title || document.title;
-  document.getElementById('twitter-description').content = seo.description || '';
+  document.getElementById('meta-robots').content = seo.robots || 'index, follow';
+  document.getElementById('meta-author').content = seo.author || 'Karmazin Tattoo Studio';
+  document.getElementById('canonical-link').href = seo.canonicalUrl || 'https://karmazin.netlify.app/';
+  document.getElementById('og-title').content = seo.ogTitle || seo.title || document.title;
+  document.getElementById('og-description').content = seo.ogDescription || seo.description || '';
+  document.getElementById('og-image').content = seo.ogImage || 'https://karmazin.netlify.app/og-image.jpg';
+  document.getElementById('og-url').content = seo.ogUrl || seo.canonicalUrl || 'https://karmazin.netlify.app/';
+  document.getElementById('twitter-title').content = seo.twitterTitle || seo.ogTitle || seo.title || document.title;
+  document.getElementById('twitter-description').content = seo.twitterDescription || seo.ogDescription || seo.description || '';
+  document.getElementById('twitter-image').content = seo.twitterImage || seo.ogImage || 'https://karmazin.netlify.app/og-image.jpg';
+  document.getElementById('schema-json').textContent = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'TattooParlor',
+    name: 'Karmazin Tattoo Studio',
+    url: seo.canonicalUrl || 'https://karmazin.netlify.app/',
+    image: seo.ogImage || 'https://karmazin.netlify.app/og-image.jpg'
+  });
 
   const root = document.documentElement.style;
   root.setProperty('--void', C.theme.void);
@@ -518,7 +540,8 @@ async function loadSiteContent(){
     const el = document.createElement('div');
     el.className = 'gallery-cell';
     el.dataset.index = i;
-    el.innerHTML = `<img src="${escapeHtml(g.src)}" alt="${escapeHtml(g.caption)}" loading="lazy">
+    const altText = g.caption ? `${g.caption} — авторське татуювання в Karmazin Tattoo Studio` : 'Авторське татуювання Karmazin Tattoo Studio';
+    el.innerHTML = `<img src="${escapeHtml(g.src)}" alt="${escapeHtml(altText)}" loading="lazy">
       <div class="expand-hint"><svg viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></div>
       <div class="cap">${escapeHtml(g.caption)}</div>`;
     el.addEventListener('click', () => openLightbox(i));
