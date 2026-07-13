@@ -76,7 +76,8 @@ collections:
             widget: "list"
             fields:
               - { label: "Фото", name: "src", widget: "image" }
-              - { label: "Підпис", name: "caption", widget: "string" }
+              - { label: "Підпис (короткий, під фото)", name: "caption", widget: "string" }
+              - { label: "Опис (показується при відкритті фото на весь екран)", name: "description", widget: "text", required: false }
 
           - label: "Ціни"
             name: "pricing"
