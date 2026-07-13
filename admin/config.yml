@@ -15,6 +15,14 @@ collections:
         fields:
           - { label: "Посилання на Instagram", name: "instagramUrl", widget: "string" }
           - { label: "Номер телефону (в шапці сайту)", name: "phone", widget: "string" }
+
+          - label: "SEO"
+            name: "seo"
+            widget: "object"
+            fields:
+              - { label: "Title сторінки", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+
           - { label: "Рядок у підвалі сайту", name: "footer", widget: "string" }
 
           - label: "Кольори сайту"

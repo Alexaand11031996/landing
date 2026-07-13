@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Karmazin Tattoo — тату-майстер у Вільногорську</title>
+<meta name="description" id="meta-description" content="Авторські тату, чорна лінія, реалізм та ілюстративні сюжети у Вільногорську. Запис на сеанс у тату-студії Karmazin Tattoo.">
+<meta property="og:title" id="og-title" content="Karmazin Tattoo — тату-майстер у Вільногорську">
+<meta property="og:description" id="og-description" content="Авторські тату, чорна лінія, реалізм та ілюстративні сюжети у Вільногорську. Запис на сеанс у тату-студії Karmazin Tattoo.">
+<meta name="twitter:title" id="twitter-title" content="Karmazin Tattoo — тату-майстер у Вільногорську">
+<meta name="twitter:description" id="twitter-description" content="Авторські тату, чорна лінія, реалізм та ілюстративні сюжети у Вільногорську. Запис на сеанс у тату-студії Karmazin Tattoo.">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -449,6 +454,14 @@ async function loadSiteContent(){
 
 (async () => {
   const C = await loadSiteContent();
+
+  const seo = C.seo || {};
+  document.title = seo.title || 'Karmazin Tattoo — тату-майстер у Вільногорську';
+  document.getElementById('meta-description').content = seo.description || '';
+  document.getElementById('og-title').content = seo.title || document.title;
+  document.getElementById('og-description').content = seo.description || '';
+  document.getElementById('twitter-title').content = seo.title || document.title;
+  document.getElementById('twitter-description').content = seo.description || '';
 
   const root = document.documentElement.style;
   root.setProperty('--void', C.theme.void);
