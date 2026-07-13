@@ -1,0 +1,104 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "images"
+
+collections:
+  - name: "site"
+    label: "Сайт Karmazin Tattoo"
+    files:
+      - name: "content"
+        label: "Весь контент сайту"
+        file: "content/site.json"
+        fields:
+          - { label: "Посилання на Instagram", name: "instagramUrl", widget: "string" }
+          - { label: "Номер телефону (в шапці сайту)", name: "phone", widget: "string" }
+          - { label: "Рядок у підвалі сайту", name: "footer", widget: "string" }
+
+          - label: "Кольори сайту"
+            name: "theme"
+            widget: "object"
+            fields:
+              - { label: "Фон сторінки (hex)", name: "void", widget: "string" }
+              - { label: "Фон панелей і карток (hex)", name: "ink", widget: "string" }
+              - { label: "Акцентний колір (hex)", name: "crimson", widget: "string" }
+              - { label: "Акцентний колір, яскравіший (hex)", name: "crimsonBright", widget: "string" }
+              - { label: "Колір тексту (hex)", name: "bone", widget: "string" }
+
+          - label: "Головний екран"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Маленький напис зверху", name: "eyebrow", widget: "string" }
+              - { label: "Заголовок, рядок 1", name: "titleLine1", widget: "string" }
+              - { label: "Заголовок, рядок 2", name: "titleLine2", widget: "string" }
+              - { label: "Заголовок, рядок 3", name: "titleLine3", widget: "string" }
+              - { label: "Акцентне слово", name: "titleEm", widget: "string" }
+              - { label: "Опис під заголовком", name: "lead", widget: "text" }
+              - { label: "Текст головної кнопки", name: "ctaPrimary", widget: "string" }
+              - { label: "Текст другорядної кнопки", name: "ctaSecondary", widget: "string" }
+              - { label: "«Печатка»: маленький напис", name: "stampSmall", widget: "string" }
+              - { label: "«Печатка»: велике слово", name: "stampBig", widget: "string" }
+              - { label: "«Печатка»: підпис знизу", name: "stampBottom", widget: "string" }
+
+          - label: "Майстер"
+            name: "master"
+            widget: "object"
+            fields:
+              - { label: "Імʼя", name: "name", widget: "string" }
+              - { label: "Абзац 1", name: "bio1", widget: "text" }
+              - { label: "Абзац 2", name: "bio2", widget: "text" }
+              - { label: "Цифра 1", name: "stat1Num", widget: "string" }
+              - { label: "Підпис 1", name: "stat1Label", widget: "string" }
+              - { label: "Цифра 2", name: "stat2Num", widget: "string" }
+              - { label: "Підпис 2", name: "stat2Label", widget: "string" }
+              - { label: "Цифра 3", name: "stat3Num", widget: "string" }
+              - { label: "Підпис 3", name: "stat3Label", widget: "string" }
+
+          - label: "Стилі роботи"
+            name: "styles"
+            widget: "list"
+            fields:
+              - { label: "Назва стилю", name: "title", widget: "string" }
+              - { label: "Опис", name: "text", widget: "text" }
+
+          - label: "Як проходить запис (кроки)"
+            name: "process"
+            widget: "list"
+            fields:
+              - { label: "Назва кроку", name: "title", widget: "string" }
+              - { label: "Опис", name: "text", widget: "text" }
+
+          - label: "Галерея робіт"
+            name: "gallery"
+            widget: "list"
+            fields:
+              - { label: "Фото", name: "src", widget: "image" }
+              - { label: "Підпис", name: "caption", widget: "string" }
+
+          - label: "Ціни"
+            name: "pricing"
+            widget: "object"
+            fields:
+              - { label: "Примітка над таблицею", name: "note", widget: "text" }
+              - label: "Пункти прайсу"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Назва", name: "name", widget: "string" }
+                  - { label: "Ціна (грн)", name: "price", widget: "string" }
+                  - { label: "Примітка", name: "note", widget: "string" }
+
+          - label: "Блок запису"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "Заголовок", name: "heading", widget: "string" }
+              - { label: "Текст", name: "text", widget: "text" }
+              - { label: "Текст кнопки", name: "ctaPrimary", widget: "string" }
+              - { label: "Місто", name: "city", widget: "string" }
+              - { label: "Формат запису", name: "format", widget: "string" }
+              - { label: "Канал звʼязку", name: "channel", widget: "string" }
+              - { label: "Про ескіз", name: "sketch", widget: "string" }

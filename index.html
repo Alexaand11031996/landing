@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karmazin Tattoo — тату-майстер у Вільногорську</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Caveat:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0d0c0e; --ink:#17161a; --ink-2:#201e23;
+    --bone:#e7dcc9; --bone-dim:#b8ac97;
+    --crimson:#8b1e3f; --crimson-bright:#b23155;
+    --smoke:#6e6a63; --line: rgba(231,220,201,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--void); color:var(--bone); font-family:'Inter',sans-serif;
+    font-size:16px; line-height:1.6; overflow-x:hidden;
+    background-image:
+      radial-gradient(circle at 15% 10%, color-mix(in srgb, var(--crimson) 14%, transparent), transparent 45%),
+      radial-gradient(circle at 85% 90%, color-mix(in srgb, var(--crimson) 11%, transparent), transparent 40%);
+  }
+  ::selection{ background:var(--crimson); color:var(--bone);}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 24px;}
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--crimson-bright); display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--crimson-bright); display:inline-block;}
+  h1,h2,h3{ font-family:'Oswald', sans-serif; text-transform:uppercase; letter-spacing:.01em; font-weight:600; color:var(--bone);}
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--crimson-bright); outline-offset:3px; }
+
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(13,12,14,0.78); backdrop-filter:blur(10px); border-bottom:1px solid var(--line);
+  }
+  nav{ display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1180px; margin:0 auto;}
+  .brand{ font-family:'Oswald', sans-serif; font-weight:700; letter-spacing:.06em; font-size:18px; text-transform:uppercase; display:flex; align-items:center; gap:10px;}
+  .brand .dot{width:8px; height:8px; border-radius:50%; background:var(--crimson-bright); box-shadow:0 0 10px var(--crimson-bright);}
+  .nav-links{display:flex; gap:24px; font-size:14px; letter-spacing:.03em;}
+  .nav-links a{color:var(--bone-dim); transition:color .2s;}
+  .nav-links a:hover{color:var(--bone);}
+  .nav-cta{
+    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:.05em;
+    border:1px solid var(--crimson); padding:9px 16px; color:var(--bone);
+    transition:background .2s, border-color .2s; white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--crimson);}
+  .nav-phone{
+    font-family:'JetBrains Mono', monospace; font-size:13px; letter-spacing:.03em;
+    color:var(--bone); display:flex; align-items:center; gap:7px; white-space:nowrap;
+    transition:color .2s;
+  }
+  .nav-phone svg{ width:15px; height:15px; stroke:var(--crimson-bright); fill:none; stroke-width:1.6; flex-shrink:0;}
+  .nav-phone:hover{ color:var(--crimson-bright); }
+  .burger{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none;}
+  .burger span{width:24px; height:2px; background:var(--bone);}
+
+  .hero{ min-height:100vh; display:flex; align-items:center; padding:140px 0 80px; position:relative;}
+  .hero .wrap{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;}
+  .hero-copy .eyebrow{margin-bottom:22px;}
+  .hero h1{ font-size:clamp(40px, 6.4vw, 74px); line-height:0.98; margin-bottom:22px; text-transform:none;}
+  .hero h1 em{ font-style:normal; color:var(--crimson-bright);}
+  .hero p.lead{ font-size:17px; color:var(--bone-dim); max-width:460px; margin-bottom:34px;}
+  .cta-row{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px; font-family:'JetBrains Mono', monospace;
+    font-size:13px; letter-spacing:.04em; padding:15px 26px; border:1px solid var(--bone);
+    transition:transform .2s, background .2s, color .2s, border-color .2s; cursor:pointer;
+  }
+  .btn.primary{background:var(--crimson); border-color:var(--crimson);}
+  .btn.primary:hover{background:var(--crimson-bright); border-color:var(--crimson-bright); transform:translateY(-2px);}
+  .btn.ghost:hover{background:var(--bone); color:var(--void); transform:translateY(-2px);}
+
+  .stamp-board{ position:relative; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center;}
+  .stamp-circle{
+    width:78%; aspect-ratio:1/1; border-radius:50%; border:2px solid var(--bone);
+    display:flex; align-items:center; justify-content:center; position:relative;
+    animation:stamp-in 900ms cubic-bezier(.2,.8,.2,1) both; animation-delay:.15s;
+  }
+  .stamp-circle::before{ content:""; position:absolute; inset:10px; border-radius:50%; border:1px dashed var(--line);}
+  .stamp-circle .stamp-text{ font-family:'Oswald', sans-serif; text-align:center; font-size:15px; letter-spacing:.18em; text-transform:uppercase; color:var(--bone); line-height:1.9;}
+  .stamp-circle .stamp-text .big{ font-size:26px; display:block; color:var(--crimson-bright); letter-spacing:.06em;}
+  @keyframes stamp-in{
+    0%{ transform:scale(1.5) rotate(-8deg); opacity:0; filter:blur(2px);}
+    60%{ transform:scale(0.96) rotate(2deg); opacity:1;}
+    100%{ transform:scale(1) rotate(-4deg); opacity:1;}
+  }
+  .flash-icon{ position:absolute; width:74px; height:74px; opacity:.9; animation:float 5s ease-in-out infinite;}
+  .flash-icon svg{width:100%; height:100%; stroke:var(--bone-dim); fill:none; stroke-width:1.4;}
+  .fi-1{top:2%; left:6%; animation-delay:0s;}
+  .fi-2{bottom:6%; left:0%; animation-delay:.8s; width:64px; height:64px;}
+  .fi-3{top:6%; right:2%; animation-delay:1.4s;}
+  .fi-4{bottom:0%; right:10%; animation-delay:.4s; width:60px; height:60px;}
+  @keyframes float{ 0%,100%{ transform:translateY(0) rotate(0deg);} 50%{ transform:translateY(-8px) rotate(3deg);} }
+  @media (prefers-reduced-motion: reduce){ .stamp-circle, .flash-icon{ animation:none !important; } }
+
+  section{ padding:110px 0; position:relative; }
+  .section-head{ max-width:640px; margin-bottom:56px; }
+  .section-head h2{ font-size:clamp(30px,4vw,44px); margin-top:14px; }
+  .divider{ height:1px; background:var(--line); width:100%; }
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  .master{ display:grid; grid-template-columns:0.8fr 1.2fr; gap:60px; align-items:center;}
+  .master-frame{
+    aspect-ratio:4/5; border:1px solid var(--line); position:relative; overflow:hidden;
+    background:linear-gradient(160deg, var(--ink) 0%, var(--ink-2) 100%);
+  }
+  .master-frame img{ width:100%; height:100%; object-fit:cover; object-position:top center; filter:grayscale(.15) contrast(1.05);}
+  .master-frame .corner{ position:absolute; width:26px; height:26px; border:1px solid var(--crimson-bright); z-index:2;}
+  .master-frame .corner.tl{top:14px; left:14px; border-right:none; border-bottom:none;}
+  .master-frame .corner.br{bottom:14px; right:14px; border-left:none; border-top:none;}
+  .master-bio p{ color:var(--bone-dim); margin-bottom:18px; max-width:560px;}
+  .master-stats{ display:flex; gap:40px; margin-top:32px; flex-wrap:wrap;}
+  .stat b{ font-family:'Oswald',sans-serif; font-size:32px; color:var(--crimson-bright); display:block;}
+  .stat span{ font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:.05em; color:var(--smoke); text-transform:uppercase;}
+
+  .styles-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .style-card{ background:var(--void); padding:36px 28px; transition:background .25s; position:relative;}
+  .style-card:hover{ background:var(--ink); }
+  .style-card .num{ font-family:'JetBrains Mono', monospace; color:var(--crimson-bright); font-size:12px; margin-bottom:18px; display:block;}
+  .style-card h3{font-size:19px; margin-bottom:10px;}
+  .style-card p{color:var(--bone-dim); font-size:14.5px;}
+
+  .process-list{ display:flex; flex-direction:column; }
+  .process-item{ display:grid; grid-template-columns:90px 1fr; gap:28px; padding:30px 0; border-top:1px solid var(--line); align-items:baseline;}
+  .process-item:last-child{ border-bottom:1px solid var(--line); }
+  .process-num{ font-family:'JetBrains Mono', monospace; color:var(--crimson-bright); font-size:14px;}
+  .process-item h3{ font-size:20px; margin-bottom:8px; text-transform:none; }
+  .process-item p{ color:var(--bone-dim); max-width:600px; }
+
+  .gallery-note{ color:var(--bone-dim); max-width:560px; margin-bottom:40px;}
+  .gallery-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:14px;}
+  .gallery-cell{
+    aspect-ratio:4/5; border:1px solid var(--line); position:relative; overflow:hidden;
+    background:var(--ink); transition:transform .3s, border-color .3s;
+  }
+  .gallery-cell img{ width:100%; height:100%; object-fit:cover; transition:transform .4s;}
+  .gallery-cell:hover img{ transform:scale(1.05); }
+  .gallery-cell:hover{ border-color:var(--crimson); z-index:2;}
+  .gallery-cell .cap{
+    position:absolute; left:0; right:0; bottom:0; padding:12px 14px;
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:.03em;
+    background:linear-gradient(0deg, rgba(13,12,14,0.9), transparent); color:var(--bone-dim);
+  }
+
+  .pricing{ }
+  .pricing-note{ color:var(--bone-dim); max-width:600px; margin-bottom:40px; font-size:14.5px;}
+  .pricing-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .price-card{ background:var(--void); padding:30px 28px;}
+  .price-card .p-name{ font-size:17px; margin-bottom:10px; text-transform:none; font-family:'Oswald',sans-serif; font-weight:500;}
+  .price-card .p-price{ font-family:'JetBrains Mono', monospace; color:var(--crimson-bright); font-size:20px; margin-bottom:8px;}
+  .price-card .p-note{ color:var(--smoke); font-size:13px;}
+
+  .contact{ background:var(--ink); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .contact-inner{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; align-items:center;}
+  .contact h2{ font-size:clamp(28px,4vw,42px); margin-bottom:18px;}
+  .contact p{ color:var(--bone-dim); max-width:460px; margin-bottom:30px;}
+  .contact-card{ border:1px solid var(--line); padding:34px;}
+  .contact-row{ display:flex; justify-content:space-between; padding:16px 0; border-bottom:1px solid var(--line); font-size:14.5px;}
+  .contact-row:last-child{ border-bottom:none; }
+  .contact-row span:first-child{ color:var(--smoke); font-family:'JetBrains Mono', monospace; font-size:12px; text-transform:uppercase; letter-spacing:.05em;}
+
+  footer{ padding:40px 0; text-align:center; color:var(--smoke); font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:.04em;}
+
+  @media (max-width: 900px){
+    .nav-links{ display:none; }
+    .burger{ display:flex; }
+    .hero .wrap, .master, .contact-inner{ grid-template-columns:1fr; }
+    .hero{ padding-top:120px; }
+    .stamp-board{ margin-top:20px; max-width:340px; margin-inline:auto; }
+    .styles-grid{ grid-template-columns:repeat(2,1fr); }
+    .gallery-grid{ grid-template-columns:repeat(2,1fr); }
+    .pricing-grid{ grid-template-columns:1fr; }
+    .master-stats{ gap:26px; }
+    .process-item{ grid-template-columns:50px 1fr; }
+  }
+  @media (max-width: 480px){
+    .styles-grid{ grid-template-columns:1fr; }
+    .cta-row{ flex-direction:column; }
+    .btn{ justify-content:center; }
+    .nav-phone span{ display:none; }
+    .nav-cta{ padding:9px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="brand"><span class="dot"></span>KARMAZIN&nbsp;TATTOO</div>
+    <div class="nav-links">
+      <a href="#master">Майстер</a>
+      <a href="#styles">Стилі</a>
+      <a href="#process">Як проходить сеанс</a>
+      <a href="#gallery">Роботи</a>
+      <a href="#pricing">Ціни</a>
+      <a href="#contact">Запис</a>
+    </div>
+    <a class="nav-phone" id="nav-phone" href="tel:">
+      <svg viewBox="0 0 24 24"><path d="M6 3h3l2 5-2.5 1.5a11 11 0 0 0 5 5L15 12l5 2v3a2 2 0 0 1-2 2A15 15 0 0 1 4 5a2 2 0 0 1 2-2Z"/></svg>
+      <span id="nav-phone-text"></span>
+    </a>
+    <a class="nav-cta" id="nav-instagram" href="#" target="_blank" rel="noopener">Instagram →</a>
+    <button class="burger" aria-label="Меню" onclick="const n=document.querySelector('.nav-links'); n.style.display='flex'; n.style.position='fixed'; n.style.flexDirection='column'; n.style.top='64px'; n.style.right='24px'; n.style.background='#17161a'; n.style.padding='20px 26px'; n.style.border='1px solid rgba(231,220,201,0.14)';">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <div class="eyebrow" id="hero-eyebrow"></div>
+        <h1 id="hero-title"></h1>
+        <p class="lead" id="hero-lead"></p>
+        <div class="cta-row">
+          <a class="btn primary" id="hero-cta-primary" href="#" target="_blank" rel="noopener"></a>
+          <a class="btn ghost" id="hero-cta-secondary" href="#gallery"></a>
+        </div>
+      </div>
+      <div class="stamp-board" aria-hidden="true">
+        <div class="flash-icon fi-1"><svg viewBox="0 0 64 64"><path d="M32 6c6 10 18 14 18 28 0 10-8 18-18 18S14 44 14 34C14 20 26 16 32 6Z"/><path d="M32 20v24M24 30h16"/></svg></div>
+        <div class="flash-icon fi-2"><svg viewBox="0 0 64 64"><path d="M12 40c8-18 24-26 40-24-6 12-8 26-18 32-10 6-22 2-22-8Z"/><circle cx="20" cy="36" r="2"/></svg></div>
+        <div class="flash-icon fi-3"><svg viewBox="0 0 64 64"><path d="M32 4v40M20 16l12-12 12 12M18 44c0 8 6 14 14 14s14-6 14-14"/></svg></div>
+        <div class="flash-icon fi-4"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="22"/><path d="M32 10v10M32 44v10M10 32h10M44 32h10"/></svg></div>
+        <div class="stamp-circle">
+          <div class="stamp-text" id="hero-stamp"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="divider"></div></div>
+
+  <section id="master">
+    <div class="wrap master">
+      <div class="master-frame reveal">
+        <div class="corner tl"></div><div class="corner br"></div>
+        <img src="images/master-at-work.jpg" alt="Майстер за роботою">
+      </div>
+      <div class="master-bio reveal">
+        <div class="eyebrow">Майстер</div>
+        <h2 style="margin-top:14px; font-size:clamp(26px,3.4vw,38px);" id="master-name"></h2>
+        <p id="master-bio1"></p>
+        <p id="master-bio2"></p>
+        <div class="master-stats">
+          <div class="stat"><b id="stat1-num"></b><span id="stat1-label"></span></div>
+          <div class="stat"><b id="stat2-num"></b><span id="stat2-label"></span></div>
+          <div class="stat"><b id="stat3-num"></b><span id="stat3-label"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="divider"></div></div>
+
+  <section id="styles">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Спеціалізація</div>
+        <h2>В яких стилях працюю</h2>
+      </div>
+      <div class="styles-grid reveal" id="styles-grid"></div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="divider"></div></div>
+
+  <section id="process">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Що далі</div>
+        <h2>Як проходить запис</h2>
+      </div>
+      <div class="process-list reveal" id="process-list"></div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="divider"></div></div>
+
+  <section id="gallery">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Портфоліо</div>
+        <h2>Реальні роботи</h2>
+      </div>
+      <p class="gallery-note reveal">Свіжі сеанси й повне портфоліо — в Instagram-профілі, тут — добірка робіт у різних стилях.</p>
+      <div class="gallery-grid reveal" id="gallery-grid"></div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="divider"></div></div>
+
+  <section id="pricing">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Вартість</div>
+        <h2>Орієнтовні ціни</h2>
+      </div>
+      <p class="pricing-note reveal" id="pricing-note"></p>
+      <div class="pricing-grid reveal" id="pricing-grid"></div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap contact-inner">
+      <div class="reveal">
+        <div class="eyebrow">Запис</div>
+        <h2 id="contact-heading"></h2>
+        <p id="contact-text"></p>
+        <div class="cta-row">
+          <a class="btn primary" id="contact-cta" href="#" target="_blank" rel="noopener"></a>
+        </div>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-row"><span>Місто</span><span id="contact-city"></span></div>
+        <div class="contact-row"><span>Формат</span><span id="contact-format"></span></div>
+        <div class="contact-row"><span>Звʼязок</span><span id="contact-channel"></span></div>
+        <div class="contact-row"><span>Ескіз</span><span id="contact-sketch"></span></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer><div class="wrap" id="site-footer"></div></footer>
+
+<script src="content.default.js"></script>
+<script>
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+async function loadSiteContent(){
+  let content = JSON.parse(JSON.stringify(DEFAULT_CONTENT));
+  try{
+    const res = await fetch('content/site.json', { cache: 'no-store' });
+    if(res.ok){
+      const data = await res.json();
+      content = deepMerge(DEFAULT_CONTENT, data);
+    }
+  }catch(e){
+    // не вдалося завантажити content/site.json (наприклад, відкрито з диска без сервера) — лишаємось на дефолтних значеннях
+  }
+  return content;
+}
+
+(async () => {
+  const C = await loadSiteContent();
+
+  const root = document.documentElement.style;
+  root.setProperty('--void', C.theme.void);
+  root.setProperty('--ink', C.theme.ink);
+  root.setProperty('--crimson', C.theme.crimson);
+  root.setProperty('--crimson-bright', C.theme.crimsonBright);
+  root.setProperty('--bone', C.theme.bone);
+
+  document.getElementById('nav-instagram').href = C.instagramUrl;
+
+  const navPhone = document.getElementById('nav-phone');
+  document.getElementById('nav-phone-text').textContent = C.phone;
+  navPhone.href = 'tel:' + C.phone.replace(/[^\d+]/g, '');
+
+  document.getElementById('hero-eyebrow').textContent = C.hero.eyebrow;
+  document.getElementById('hero-title').innerHTML =
+    `${escapeHtml(C.hero.titleLine1)}<br>${escapeHtml(C.hero.titleLine2)}<br><em>${escapeHtml(C.hero.titleEm)}</em> ${escapeHtml(C.hero.titleLine3)}`;
+  document.getElementById('hero-lead').textContent = C.hero.lead;
+  const heroPrimary = document.getElementById('hero-cta-primary');
+  heroPrimary.textContent = C.hero.ctaPrimary;
+  heroPrimary.href = C.instagramUrl;
+  document.getElementById('hero-cta-secondary').textContent = C.hero.ctaSecondary;
+  document.getElementById('hero-stamp').innerHTML =
+    `${escapeHtml(C.hero.stampSmall)}<span class="big">${escapeHtml(C.hero.stampBig)}</span>${escapeHtml(C.hero.stampBottom)}`;
+
+  document.getElementById('master-name').textContent = C.master.name;
+  document.getElementById('master-bio1').textContent = C.master.bio1;
+  document.getElementById('master-bio2').textContent = C.master.bio2;
+  document.getElementById('stat1-num').textContent = C.master.stat1Num;
+  document.getElementById('stat1-label').textContent = C.master.stat1Label;
+  document.getElementById('stat2-num').textContent = C.master.stat2Num;
+  document.getElementById('stat2-label').textContent = C.master.stat2Label;
+  document.getElementById('stat3-num').textContent = C.master.stat3Num;
+  document.getElementById('stat3-label').textContent = C.master.stat3Label;
+
+  const stylesGrid = document.getElementById('styles-grid');
+  C.styles.forEach((s, i) => {
+    const el = document.createElement('div');
+    el.className = 'style-card';
+    el.innerHTML = `<span class="num">0${i+1}</span><h3>${escapeHtml(s.title)}</h3><p>${escapeHtml(s.text)}</p>`;
+    stylesGrid.appendChild(el);
+  });
+
+  const processList = document.getElementById('process-list');
+  C.process.forEach((p, i) => {
+    const el = document.createElement('div');
+    el.className = 'process-item';
+    el.innerHTML = `<div class="process-num">0${i+1}</div><div><h3>${escapeHtml(p.title)}</h3><p>${escapeHtml(p.text)}</p></div>`;
+    processList.appendChild(el);
+  });
+
+  const galleryGrid = document.getElementById('gallery-grid');
+  C.gallery.forEach(g => {
+    const el = document.createElement('div');
+    el.className = 'gallery-cell';
+    el.innerHTML = `<img src="${escapeHtml(g.src)}" alt="${escapeHtml(g.caption)}" loading="lazy"><div class="cap">${escapeHtml(g.caption)}</div>`;
+    galleryGrid.appendChild(el);
+  });
+
+  document.getElementById('pricing-note').textContent = C.pricing.note;
+  const pricingGrid = document.getElementById('pricing-grid');
+  C.pricing.items.forEach(p => {
+    const el = document.createElement('div');
+    el.className = 'price-card';
+    el.innerHTML = `<div class="p-name">${escapeHtml(p.name)}</div><div class="p-price">${escapeHtml(p.price)}</div><div class="p-note">${escapeHtml(p.note)}</div>`;
+    pricingGrid.appendChild(el);
+  });
+
+  document.getElementById('contact-heading').textContent = C.contact.heading;
+  document.getElementById('contact-text').textContent = C.contact.text;
+  const contactCta = document.getElementById('contact-cta');
+  contactCta.textContent = C.contact.ctaPrimary;
+  contactCta.href = C.instagramUrl;
+  document.getElementById('contact-city').textContent = C.contact.city;
+  document.getElementById('contact-format').textContent = C.contact.format;
+  document.getElementById('contact-channel').textContent = C.contact.channel;
+  document.getElementById('contact-sketch').textContent = C.contact.sketch;
+
+
+  document.getElementById('site-footer').textContent = C.footer;
+
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  items.forEach(i=>io.observe(i));
+
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.addEventListener('click', ()=>{
+      if(window.innerWidth <= 900){ document.querySelector('.nav-links').style.display='none'; }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
