@@ -577,6 +577,7 @@ async function loadSiteContent(){
   document.getElementById('stat3-label').textContent = C.master.stat3Label;
 
   const stylesGrid = document.getElementById('styles-grid');
+  stylesGrid.innerHTML = '';
   C.styles.forEach((s, i) => {
     const el = document.createElement('div');
     el.className = 'style-card';
@@ -585,6 +586,7 @@ async function loadSiteContent(){
   });
 
   const processList = document.getElementById('process-list');
+  processList.innerHTML = '';
   C.process.forEach((p, i) => {
     const el = document.createElement('div');
     el.className = 'process-item';
@@ -593,6 +595,7 @@ async function loadSiteContent(){
   });
 
   const galleryGrid = document.getElementById('gallery-grid');
+  galleryGrid.innerHTML = '';
   C.gallery.forEach((g, i) => {
     const el = document.createElement('div');
     el.className = 'gallery-cell';
@@ -687,6 +690,7 @@ async function loadSiteContent(){
 
   document.getElementById('pricing-note').textContent = C.pricing.note;
   const pricingGrid = document.getElementById('pricing-grid');
+  pricingGrid.innerHTML = '';
   C.pricing.items.forEach(p => {
     const el = document.createElement('div');
     el.className = 'price-card';

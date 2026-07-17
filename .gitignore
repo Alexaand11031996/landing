@@ -25,3 +25,7 @@ TestResults.xml
 ### Secrets ###
 .env
 .env.*
+
+### Build output ###
+dist/
+node_modules/

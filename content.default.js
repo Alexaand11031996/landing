@@ -106,3 +106,9 @@ function deepMerge(base, override) {
   }
   return (override !== undefined) ? override : base;
 }
+
+// Робить цей файл доступним і для build.js (Node, при збірці на Netlify) —
+// у браузері module не визначено, тож цей блок там просто ігнорується.
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { DEFAULT_CONTENT, deepMerge };
+}
