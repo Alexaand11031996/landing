@@ -70,7 +70,7 @@
     background:rgba(13,12,14,0.78); backdrop-filter:blur(10px); border-bottom:1px solid var(--line);
   }
   nav{ display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1180px; margin:0 auto;}
-  .brand{ font-family:'Oswald', sans-serif; font-weight:700; letter-spacing:.06em; font-size:18px; text-transform:uppercase; display:flex; align-items:center; gap:10px;}
+  .brand{ font-family:'Oswald', sans-serif; font-weight:700; letter-spacing:.06em; font-size:18px; text-transform:uppercase; display:flex; align-items:center; gap:10px; cursor:pointer;}
   .brand .dot{width:8px; height:8px; border-radius:50%; background:var(--crimson-bright); box-shadow:0 0 10px var(--crimson-bright);}
   .nav-links{display:flex; gap:24px; font-size:14px; letter-spacing:.03em;}
   .nav-links a{color:var(--bone-dim); transition:color .2s;}
@@ -308,7 +308,7 @@
 
 <header>
   <nav>
-    <div class="brand"><span class="dot"></span>KARMAZIN&nbsp;TATTOO</div>
+    <div class="brand" id="brand-home"><span class="dot"></span>KARMAZIN&nbsp;TATTOO</div>
     <div class="nav-links">
       <a href="#master">Майстер</a>
       <a href="#styles">Стилі</a>
@@ -679,6 +679,11 @@ async function loadSiteContent(){
     if(navEl.classList.contains('menu-open') && !navEl.contains(e.target)) closeMenu();
   });
   document.addEventListener('keydown', e => { if(e.key === 'Escape') closeMenu(); });
+
+  document.getElementById('brand-home').addEventListener('click', () => {
+    closeMenu();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 
   document.getElementById('pricing-note').textContent = C.pricing.note;
   const pricingGrid = document.getElementById('pricing-grid');
