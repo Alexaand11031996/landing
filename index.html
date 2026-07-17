@@ -705,11 +705,39 @@ async function loadSiteContent(){
   const bookingModal = document.getElementById('booking-modal');
   const bookingForm = document.getElementById('booking-form');
   const bookingSuccess = document.getElementById('booking-success');
+  const bookingSubmitBtn = bookingForm.querySelector('button[type="submit"]');
+  const BOOKING_COOLDOWN_MS = 3 * 60 * 1000;
+  let bookingCooldownInterval = null;
+
+  function bookingCooldownRemaining(){
+    const last = Number(localStorage.getItem('bookingLastSubmit') || 0);
+    const remaining = BOOKING_COOLDOWN_MS - (Date.now() - last);
+    return remaining > 0 ? remaining : 0;
+  }
+  function updateBookingCooldownUI(){
+    clearInterval(bookingCooldownInterval);
+    const tick = () => {
+      const remaining = bookingCooldownRemaining();
+      if(remaining <= 0){
+        bookingSubmitBtn.disabled = false;
+        bookingSubmitBtn.textContent = 'Надіслати заявку';
+        clearInterval(bookingCooldownInterval);
+        return;
+      }
+      bookingSubmitBtn.disabled = true;
+      const m = Math.floor(remaining / 60000);
+      const s = String(Math.floor((remaining % 60000) / 1000)).padStart(2, '0');
+      bookingSubmitBtn.textContent = `Зачекайте ${m}:${s}`;
+    };
+    tick();
+    bookingCooldownInterval = setInterval(tick, 1000);
+  }
 
   function openBooking(){
     bookingModal.classList.add('open');
     bookingModal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    updateBookingCooldownUI();
   }
   function closeBooking(){
     bookingModal.classList.remove('open');
@@ -718,6 +746,7 @@ async function loadSiteContent(){
     bookingSuccess.classList.remove('show');
     bookingForm.reset();
     if(window.turnstile) window.turnstile.reset();
+    clearInterval(bookingCooldownInterval);
   }
 
   document.getElementById('open-booking').addEventListener('click', openBooking);
@@ -728,6 +757,9 @@ async function loadSiteContent(){
 
   bookingForm.addEventListener('submit', async e => {
     e.preventDefault();
+    if(bookingCooldownRemaining() > 0) return;
+    bookingSubmitBtn.disabled = true;
+    bookingSubmitBtn.textContent = 'Надсилаю...';
     const data = new FormData(bookingForm);
     const payload = {
       name: data.get('name'),
@@ -748,12 +780,15 @@ async function loadSiteContent(){
       }
       bookingSuccess.textContent = 'Дякую! Вашу заявку отримано.';
       bookingSuccess.classList.add('show');
+      localStorage.setItem('bookingLastSubmit', String(Date.now()));
+      updateBookingCooldownUI();
       setTimeout(closeBooking, 1400);
     } catch (err) {
       console.error('Form submit error', err);
       bookingSuccess.textContent = 'Помилка відправки. Зателефонуйте нам напряму або спробуйте ще раз.';
       bookingSuccess.classList.add('show');
       if(window.turnstile) window.turnstile.reset();
+      updateBookingCooldownUI();
     }
   });
 
