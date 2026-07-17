@@ -453,7 +453,6 @@
       <h3 id="booking-title">Запис на сеанс</h3>
       <p id="booking-text">Заповніть форму — я звʼяжуся з вами для узгодження дати та ескізу.</p>
       <form class="booking-form" id="booking-form">
-        <input type="hidden" name="telegramId" id="booking-telegram-id" value="">
         <input id="booking-name" name="name" type="text" placeholder="Ваше імʼя" required>
         <input id="booking-phone" name="phone" type="tel" placeholder="Телефон" required>
         <input id="booking-date" name="date" type="text" placeholder="Бажана дата / час" required>
@@ -703,10 +702,7 @@ async function loadSiteContent(){
 
   const bookingModal = document.getElementById('booking-modal');
   const bookingForm = document.getElementById('booking-form');
-  const bookingTelegramId = document.getElementById('booking-telegram-id');
   const bookingSuccess = document.getElementById('booking-success');
-
-  bookingTelegramId.value = C.booking?.telegramId || '';
 
   function openBooking(){
     bookingModal.classList.add('open');
@@ -735,7 +731,6 @@ async function loadSiteContent(){
       phone: data.get('phone'),
       date: data.get('date'),
       note: data.get('note'),
-      telegramId: data.get('telegramId') || '',
       source: 'booking_form'
     };
     try {

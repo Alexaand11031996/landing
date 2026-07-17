@@ -5,18 +5,14 @@ exports.handler = async function(event) {
     }
 
     const body = JSON.parse(event.body || '{}');
-    const telegramId = String(body.telegramId || '').trim();
     const token = process.env.TELEGRAM_BOT_TOKEN;
-    const chatId = telegramId || String(process.env.TELEGRAM_CHAT_ID || '').trim();
+    const chatId = String(process.env.TELEGRAM_CHAT_ID || '').trim();
 
     if (!token || !chatId) {
       return { statusCode: 500, body: 'Telegram credentials are not configured' };
     }
-    if (!telegramId && !process.env.TELEGRAM_CHAT_ID) {
-      return { statusCode: 400, body: 'telegramId not provided in CMS and no fallback chat ID is configured' };
-    }
 
-    const text = `Нова заявка:\nІм'я: ${body.name || '-'}\nТелефон: ${body.phone || '-'}\nДата: ${body.date || '-'}\nНотатка: ${body.note || '-'}\nTelegram ID від CMS: ${telegramId || '(fallback)'}`;
+    const text = `Нова заявка:\nІм'я: ${body.name || '-'}\nТелефон: ${body.phone || '-'}\nДата: ${body.date || '-'}\nНотатка: ${body.note || '-'}`;
     const url = `https://api.telegram.org/bot${token}/sendMessage`;
 
     const response = await fetch(url, {

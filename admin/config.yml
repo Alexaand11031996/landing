@@ -41,7 +41,6 @@ collections:
             fields:
               - { label: "Адреса", name: "address", widget: "string" }
               - { label: "Час роботи", name: "workHours", widget: "string" }
-              - { label: "Telegram ID для повідомлень", name: "telegramId", widget: "string", hint: "Тільки числовий chat ID (наприклад 123456789), отриманий через бота. НЕ @юзернейм — бот не вміє писати в особисті повідомлення по юзернейму." }
 
           - label: "Кольори сайту"
             name: "theme"

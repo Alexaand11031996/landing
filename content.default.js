@@ -79,8 +79,7 @@ const DEFAULT_CONTENT = {
   },
   booking: {
     address: "Вільногорськ, Україна",
-    workHours: "Пн–Пт: 10:00–19:00",
-    telegramId: "@karmazin_tattoo"
+    workHours: "Пн–Пт: 10:00–19:00"
   },
   instagramUrl: "https://www.instagram.com/karmazin_tattoo/",
   phone: "+380 50 123 45 67",
