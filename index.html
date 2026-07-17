@@ -31,6 +31,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Caveat:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <!-- Netlify Identity: ловить invite/recovery токен, навіть якщо посилання відкрилось не з /admin/ -->
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script>
   if (window.netlifyIdentity) {
     window.netlifyIdentity.on("init", () => {});
@@ -457,6 +458,7 @@
         <input id="booking-phone" name="phone" type="tel" placeholder="Телефон" required>
         <input id="booking-date" name="date" type="text" placeholder="Бажана дата / час" required>
         <textarea id="booking-note" name="note" rows="4" placeholder="Коротко про ідею або стиль"></textarea>
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAD35usPPEEwj31CO" data-theme="dark"></div>
         <button type="submit">Надіслати заявку</button>
       </form>
       <div class="booking-success" id="booking-success">Дякую! Вашу заявку отримано.</div>
@@ -715,6 +717,7 @@ async function loadSiteContent(){
     document.body.style.overflow = '';
     bookingSuccess.classList.remove('show');
     bookingForm.reset();
+    if(window.turnstile) window.turnstile.reset();
   }
 
   document.getElementById('open-booking').addEventListener('click', openBooking);
@@ -731,6 +734,7 @@ async function loadSiteContent(){
       phone: data.get('phone'),
       date: data.get('date'),
       note: data.get('note'),
+      turnstileToken: data.get('cf-turnstile-response') || '',
       source: 'booking_form'
     };
     try {
@@ -749,6 +753,7 @@ async function loadSiteContent(){
       console.error('Form submit error', err);
       bookingSuccess.textContent = 'Помилка відправки. Зателефонуйте нам напряму або спробуйте ще раз.';
       bookingSuccess.classList.add('show');
+      if(window.turnstile) window.turnstile.reset();
     }
   });
 
