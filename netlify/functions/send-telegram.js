@@ -1,7 +1,41 @@
+const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
+
+// Rate-limit — це додатковий шар захисту поверх Turnstile, не критичний.
+// Якщо @netlify/blobs з якоїсь причини недоступний або впав — тихо
+// пропускаємо перевірку (fail-open), щоб форма запису в будь-якому разі
+// продовжувала працювати.
+async function checkRateLimit(ip) {
+  if (!ip) return true;
+  try {
+    const { getStore } = require('@netlify/blobs');
+    const store = getStore('rate-limit');
+    const key = 'booking:' + ip;
+    const now = Date.now();
+    const raw = await store.get(key, { type: 'json' });
+    let timestamps = Array.isArray(raw) ? raw.filter(t => now - t < RATE_LIMIT_WINDOW_MS) : [];
+    if (timestamps.length >= RATE_LIMIT_MAX) {
+      return false;
+    }
+    timestamps.push(now);
+    await store.setJSON(key, timestamps);
+    return true;
+  } catch (error) {
+    console.error('Rate limit check failed, allowing request:', error);
+    return true;
+  }
+}
+
 exports.handler = async function(event) {
   try {
     if (event.httpMethod !== 'POST') {
       return { statusCode: 405, body: 'Method Not Allowed' };
+    }
+
+    const clientIp = event.headers['x-nf-client-connection-ip'] || event.headers['client-ip'] || '';
+    const allowed = await checkRateLimit(clientIp);
+    if (!allowed) {
+      return { statusCode: 429, body: JSON.stringify({ ok: false, error: 'Too many requests, try again later' }) };
     }
 
     const body = JSON.parse(event.body || '{}');
@@ -24,7 +58,7 @@ exports.handler = async function(event) {
       body: JSON.stringify({
         secret: turnstileSecret,
         response: turnstileToken,
-        remoteip: event.headers['x-nf-client-connection-ip'] || event.headers['client-ip'] || '',
+        remoteip: clientIp,
       }),
     });
     const verifyResult = await verifyRes.json();
