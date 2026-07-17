@@ -126,13 +126,12 @@
       "src": "images/work-madonna.jpg",
       "caption": "Реалізм, сюжетна композиція",
       "description": "Сюжетна релігійна композиція в реалістичному стилі — тонка проробка облич і тканини, витримана в класичній чорно-сірій палітрі."
-    },
-    {
-      "src": "images/2026-07-13_14-57-54.png",
-      "caption": "тест",
-      "description": "Додатковий приклад роботи для галереї та демонстрації лайтбокса."
     }
   ],
+  "booking": {
+    "address": "Вільногорськ, Україна",
+    "workHours": "Пн–Пт: 10:00–19:00"
+  },
   "hero": {
     "titleEm": "Голка!",
     "ctaSecondary": "Дивитись роботи",
@@ -147,23 +146,19 @@
     "stampBig": "KARMAZIN"
   },
   "footer": "KARMAZIN TATTOO — ВІЛЬНОГОРСЬК · ЗРОБЛЕНО НА ЗАМОВЛЕННЯ, НЕ ЗА ШАБЛОНОМ",
-  "booking": {
-    "address": "Вільногорськ, Україна",
-    "workHours": "Пн–Пт: 10:00–19:00"
-  },
   "seo": {
-    "title": "Karmazin Tattoo Studio | Авторське татуювання",
-    "description": "Karmazin Tattoo Studio — професійне татуювання з індивідуальним підходом. Авторські ескізи, перекриття старих тату, корекція та татуювання в різних стилях. Безпечно, якісно та з увагою до кожної деталі.",
-    "canonicalUrl": "https://karmazin.netlify.app/",
-    "author": "Karmazin Tattoo Studio",
-    "robots": "index, follow",
     "ogTitle": "Karmazin Tattoo Studio",
-    "ogDescription": "Авторське татуювання та індивідуальні ескізи.",
     "ogImage": "https://karmazin.netlify.app/images/master-at-work.jpg",
-    "ogUrl": "https://karmazin.netlify.app/",
+    "ogDescription": "Авторське татуювання та індивідуальні ескізи.",
     "twitterTitle": "Karmazin Tattoo Studio",
+    "twitterImage": "https://karmazin.netlify.app/images/master-at-work.jpg",
+    "robots": "index, follow",
     "twitterDescription": "Авторське татуювання",
-    "twitterImage": "https://karmazin.netlify.app/images/master-at-work.jpg"
+    "author": "Karmazin Tattoo Studio",
+    "ogUrl": "https://karmazin.netlify.app/",
+    "title": "Karmazin Tattoo Studio | Авторське татуювання",
+    "canonicalUrl": "https://karmazin.netlify.app/",
+    "description": "Karmazin Tattoo Studio — професійне татуювання з індивідуальним підходом. Авторські ескізи, перекриття старих тату, корекція та татуювання в різних стилях. Безпечно, якісно та з увагою до кожної деталі."
   },
   "instagramUrl": "https://www.instagram.com/karmazin_tattoo/"
 }
