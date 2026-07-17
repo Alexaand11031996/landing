@@ -16,8 +16,18 @@ const DEFAULT_CONTENT = {
     stampBottom: "tattoo studio"
   },
   seo: {
-    title: "Karmazin Tattoo — тату-майстер у Вільногорську",
-    description: "Авторські тату, чорна лінія, реалізм та ілюстративні сюжети у Вільногорську. Запис на сеанс у тату-студії Karmazin Tattoo."
+    title: "Karmazin Tattoo Studio",
+    description: "Авторські тату, чорна лінія, реалізм та ілюстративні сюжети у Вільногорську. Запис на сеанс у тату-студії Karmazin Tattoo.",
+    canonicalUrl: "https://karmazin.netlify.app/",
+    author: "Karmazin Tattoo Studio",
+    robots: "index, follow",
+    ogTitle: "Karmazin Tattoo Studio",
+    ogDescription: "Авторське татуювання та індивідуальні ескізи.",
+    ogImage: "https://karmazin.netlify.app/images/master-at-work.jpg",
+    ogUrl: "https://karmazin.netlify.app/",
+    twitterTitle: "Karmazin Tattoo Studio",
+    twitterDescription: "Авторське татуювання",
+    twitterImage: "https://karmazin.netlify.app/images/master-at-work.jpg"
   },
   master: {
     name: "Анатолій Кармазін",
@@ -66,6 +76,11 @@ const DEFAULT_CONTENT = {
     format: "За попереднім записом",
     channel: "Instagram Direct",
     sketch: "Узгоджується до сеансу"
+  },
+  booking: {
+    address: "Вільногорськ, Україна",
+    workHours: "Пн–Пт: 10:00–19:00",
+    telegramId: "@karmazin_tattoo"
   },
   instagramUrl: "https://www.instagram.com/karmazin_tattoo/",
   phone: "+380 50 123 45 67",

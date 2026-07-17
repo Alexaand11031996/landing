@@ -99,31 +99,38 @@
   "gallery": [
     {
       "src": "images/work-calligraphy.jpg",
-      "caption": "Каліграфічний рукав"
+      "caption": "Каліграфічний рукав",
+      "description": "Суцільний рукав із рукописного шрифту — одна безперервна лінія, що огортає руку від плеча до зап'ястя. Робота в стилі леттеринг, витримана в чорному контурі без заливки."
     },
     {
       "src": "images/work-illustrative.jpg",
-      "caption": "Ілюстративний сюжет, гомілка"
+      "caption": "Ілюстративний сюжет, гомілка",
+      "description": "Портретний сюжет у чорно-сірій техніці з акцентом на деталізацію обличчя та фактуру вбрання. Приклад ілюстративного підходу — персонаж із власним характером."
     },
     {
       "src": "images/work-lineart-arm.jpg",
-      "caption": "Абстрактний лайнворк, передпліччя"
+      "caption": "Абстрактний лайнворк, передпліччя",
+      "description": "Абстрактна композиція з різким чорним лайнворком і плавними переходами — графічна робота, що підкреслює форму руки."
     },
     {
       "src": "images/work-dragon-back.jpg",
-      "caption": "Лайнворк-дракон, спина"
+      "caption": "Лайнворк-дракон, спина",
+      "description": "Класичний сюжет дракона, виконаний чистим лайнворком без заливки — велика робота на всю спину, розрахована на кілька сеансів."
     },
     {
       "src": "images/work-anubis-arm.jpg",
-      "caption": "Реалізм чорно-сірий, передпліччя"
+      "caption": "Реалізм чорно-сірий, передпліччя",
+      "description": "Реалістична робота в чорно-сірій гамі з детальною проробкою світлотіні. Приклад того, як реалізм працює на об'ємних ділянках тіла."
     },
     {
       "src": "images/work-madonna.jpg",
-      "caption": "Реалізм, сюжетна композиція"
+      "caption": "Реалізм, сюжетна композиція",
+      "description": "Сюжетна релігійна композиція в реалістичному стилі — тонка проробка облич і тканини, витримана в класичній чорно-сірій палітрі."
     },
     {
       "src": "images/2026-07-13_14-57-54.png",
-      "caption": "тест"
+      "caption": "тест",
+      "description": "Додатковий приклад роботи для галереї та демонстрації лайтбокса."
     }
   ],
   "hero": {
@@ -140,9 +147,24 @@
     "stampBig": "KARMAZIN"
   },
   "footer": "KARMAZIN TATTOO — ВІЛЬНОГОРСЬК · ЗРОБЛЕНО НА ЗАМОВЛЕННЯ, НЕ ЗА ШАБЛОНОМ",
+  "booking": {
+    "address": "Вільногорськ, Україна",
+    "workHours": "Пн–Пт: 10:00–19:00",
+    "telegramId": "@karmazin_tattoo"
+  },
   "seo": {
     "title": "Karmazin Tattoo Studio | Авторське татуювання",
-    "description": "Karmazin Tattoo Studio — професійне татуювання з індивідуальним підходом. Авторські ескізи, перекриття старих тату, корекція та татуювання в різних стилях. Безпечно, якісно та з увагою до кожної деталі."
+    "description": "Karmazin Tattoo Studio — професійне татуювання з індивідуальним підходом. Авторські ескізи, перекриття старих тату, корекція та татуювання в різних стилях. Безпечно, якісно та з увагою до кожної деталі.",
+    "canonicalUrl": "https://karmazin.netlify.app/",
+    "author": "Karmazin Tattoo Studio",
+    "robots": "index, follow",
+    "ogTitle": "Karmazin Tattoo Studio",
+    "ogDescription": "Авторське татуювання та індивідуальні ескізи.",
+    "ogImage": "https://karmazin.netlify.app/images/master-at-work.jpg",
+    "ogUrl": "https://karmazin.netlify.app/",
+    "twitterTitle": "Karmazin Tattoo Studio",
+    "twitterDescription": "Авторське татуювання",
+    "twitterImage": "https://karmazin.netlify.app/images/master-at-work.jpg"
   },
   "instagramUrl": "https://www.instagram.com/karmazin_tattoo/"
 }

@@ -3,21 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Karmazin Tattoo Studio</title>
-<meta name="description" id="meta-description" content="Авторські тату, чорна лінія, реалізм та ілюстративні сюжети у Вільногорську. Запис на сеанс у тату-студії Karmazin Tattoo.">
+<title id="page-title">Karmazin Tattoo Studio | Авторське татуювання</title>
+<meta name="description" id="meta-description" content="Karmazin Tattoo Studio — професійне татуювання з індивідуальним підходом. Авторські ескізи, перекриття старих тату, корекція та татуювання в різних стилях. Безпечно, якісно та з увагою до кожної деталі.">
 <meta name="robots" id="meta-robots" content="index, follow">
 <meta name="author" id="meta-author" content="Karmazin Tattoo Studio">
 <link rel="canonical" id="canonical-link" href="https://karmazin.netlify.app/">
+<meta property="og:site_name" content="Karmazin Tattoo Studio">
+<meta property="og:locale" content="uk_UA">
 <meta property="og:title" id="og-title" content="Karmazin Tattoo Studio">
 <meta property="og:description" id="og-description" content="Авторське татуювання та індивідуальні ескізи.">
-<meta property="og:image" id="og-image" content="https://karmazin.netlify.app/og-image.jpg">
+<meta property="og:image" id="og-image" content="https://karmazin.netlify.app/images/master-at-work.jpg">
+<meta property="og:image:width" content="640">
+<meta property="og:image:height" content="853">
 <meta property="og:type" content="website">
 <meta property="og:url" id="og-url" content="https://karmazin.netlify.app/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" id="twitter-title" content="Karmazin Tattoo Studio">
 <meta name="twitter:description" id="twitter-description" content="Авторське татуювання">
-<meta name="twitter:image" id="twitter-image" content="https://karmazin.netlify.app/og-image.jpg">
-<script type="application/ld+json" id="schema-json"></script>
+<meta name="twitter:image" id="twitter-image" content="https://karmazin.netlify.app/images/master-at-work.jpg">
+<meta name="theme-color" content="#0d0c0e">
+<script type="application/ld+json" id="schema-json">{"@context":"https://schema.org","@type":"TattooParlor","name":"Karmazin Tattoo Studio","url":"https://karmazin.netlify.app/","image":"https://karmazin.netlify.app/images/master-at-work.jpg","telephone":"+380 50 123 45 67","address":{"@type":"PostalAddress","addressLocality":"Вільногорськ","addressCountry":"UA"},"openingHours":"Mo-Fr 10:00-19:00"}</script>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -69,19 +74,24 @@
   .nav-links{display:flex; gap:24px; font-size:14px; letter-spacing:.03em;}
   .nav-links a{color:var(--bone-dim); transition:color .2s;}
   .nav-links a:hover{color:var(--bone);}
+  .mobile-only-link{ display:none; }
   .nav-cta{
+    display:inline-flex; align-items:center; justify-content:center;
     font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:.05em;
-    border:1px solid var(--crimson); padding:9px 16px; color:var(--bone);
-    transition:background .2s, border-color .2s; white-space:nowrap;
+    line-height:1.2; min-height:40px; border:1px solid var(--crimson); padding:9px 16px; color:var(--bone);
+    background:transparent; transition:background .2s, border-color .2s, color .2s; white-space:nowrap;
+    cursor:pointer;
   }
-  .nav-cta:hover{background:var(--crimson);}
+  .nav-cta:hover{background:var(--crimson); color:var(--bone);}
   .nav-phone{
+    display:inline-flex; align-items:center; justify-content:center;
     font-family:'JetBrains Mono', monospace; font-size:13px; letter-spacing:.03em;
-    color:var(--bone); display:flex; align-items:center; gap:7px; white-space:nowrap;
-    transition:color .2s;
+    line-height:1.2; min-height:40px; border:1px solid var(--crimson); padding:9px 16px; gap:7px;
+    color:var(--bone); background:transparent; white-space:nowrap;
+    transition:background .2s, border-color .2s, color .2s;
   }
-  .nav-phone svg{ width:15px; height:15px; stroke:var(--crimson-bright); fill:none; stroke-width:1.6; flex-shrink:0;}
-  .nav-phone:hover{ color:var(--crimson-bright); }
+  .nav-phone svg{ width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:1.6; flex-shrink:0;}
+  .nav-phone:hover{ background:var(--crimson); border-color:var(--crimson-bright); }
   .burger{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none;}
   .burger span{width:24px; height:2px; background:var(--bone);}
 
@@ -233,7 +243,6 @@
     .lb-close{ top:14px; right:14px; }
   }
 
-  .pricing{ }
   .pricing-note{ color:var(--bone-dim); max-width:600px; margin-bottom:40px; font-size:14.5px;}
   .pricing-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
   .price-card{ background:var(--void); padding:30px 28px;}
@@ -250,11 +259,32 @@
   .contact-row:last-child{ border-bottom:none; }
   .contact-row span:first-child{ color:var(--smoke); font-family:'JetBrains Mono', monospace; font-size:12px; text-transform:uppercase; letter-spacing:.05em;}
 
+  .booking-modal{ position:fixed; inset:0; z-index:250; background:rgba(8,7,8,0.92); display:flex; align-items:center; justify-content:center; padding:24px; opacity:0; visibility:hidden; transition:opacity .25s ease; }
+  .booking-modal.open{ opacity:1; visibility:visible; }
+  .booking-panel{ width:min(560px, 100%); background:var(--ink); border:1px solid var(--line); padding:32px; position:relative; }
+  .booking-panel h3{ font-size:24px; margin-bottom:12px; }
+  .booking-panel p{ color:var(--bone-dim); margin-bottom:22px; }
+  .booking-form{ display:grid; gap:14px; }
+  .booking-form input, .booking-form textarea{ width:100%; padding:13px 14px; border:1px solid var(--line); background:var(--void); color:var(--bone); font:inherit; }
+  .booking-form input::placeholder, .booking-form textarea::placeholder{ color:var(--smoke); }
+  .booking-form button{ border:none; background:var(--crimson); color:var(--bone); padding:14px 18px; font-family:'JetBrains Mono', monospace; cursor:pointer; }
+  .booking-form button:hover{ background:var(--crimson-bright); }
+  .booking-close{ position:absolute; top:14px; right:14px; background:none; border:none; color:var(--bone); cursor:pointer; font-size:24px; }
+  .booking-success{ display:none; color:#9ee7b8; margin-top:12px; }
+  .booking-success.show{ display:block; }
+
   footer{ padding:40px 0; text-align:center; color:var(--smoke); font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:.04em;}
 
   @media (max-width: 900px){
     .nav-links{ display:none; }
     .burger{ display:flex; }
+    #nav-instagram{ display:none; }
+    .mobile-only-link{ display:inline; }
+    nav.menu-open{ position:relative; }
+    nav.menu-open .nav-links{
+      display:flex; flex-direction:column; position:absolute; top:64px; right:24px;
+      background:var(--ink); padding:20px 26px; border:1px solid var(--line); z-index:60; gap:16px;
+    }
     .hero .wrap, .master, .contact-inner{ grid-template-columns:1fr; }
     .hero{ padding-top:120px; }
     .stamp-board{ margin-top:20px; max-width:340px; margin-inline:auto; }
@@ -284,14 +314,17 @@
       <a href="#process">Як проходить сеанс</a>
       <a href="#gallery">Роботи</a>
       <a href="#pricing">Ціни</a>
-      <a href="#contact">Запис</a>
+      <a href="#" id="nav-instagram-mobile" class="mobile-only-link" target="_blank" rel="noopener">Instagram →</a>
     </div>
     <a class="nav-phone" id="nav-phone" href="tel:">
       <svg viewBox="0 0 24 24"><path d="M6 3h3l2 5-2.5 1.5a11 11 0 0 0 5 5L15 12l5 2v3a2 2 0 0 1-2 2A15 15 0 0 1 4 5a2 2 0 0 1 2-2Z"/></svg>
       <span id="nav-phone-text"></span>
     </a>
-    <a class="nav-cta" id="nav-instagram" href="#" target="_blank" rel="noopener">Instagram →</a>
-    <button class="burger" aria-label="Меню" onclick="const n=document.querySelector('.nav-links'); n.style.display='flex'; n.style.position='fixed'; n.style.flexDirection='column'; n.style.top='64px'; n.style.right='24px'; n.style.background='#17161a'; n.style.padding='20px 26px'; n.style.border='1px solid rgba(231,220,201,0.14)';">
+    <div style="display:flex; gap:10px; align-items:center;">
+      <a class="nav-cta" id="nav-instagram" href="#" target="_blank" rel="noopener">Instagram →</a>
+      <button class="nav-cta" id="open-booking" type="button">Запис →</button>
+    </div>
+    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </nav>
@@ -402,6 +435,7 @@
         <p id="contact-text"></p>
         <div class="cta-row">
           <a class="btn primary" id="contact-cta" href="#" target="_blank" rel="noopener"></a>
+          <button class="btn ghost" id="contact-open-booking" type="button">Записатися</button>
         </div>
       </div>
       <div class="contact-card reveal">
@@ -412,6 +446,23 @@
       </div>
     </div>
   </section>
+
+  <div class="booking-modal" id="booking-modal" aria-hidden="true">
+    <div class="booking-panel">
+      <button class="booking-close" id="booking-close" type="button" aria-label="Закрити">×</button>
+      <h3 id="booking-title">Запис на сеанс</h3>
+      <p id="booking-text">Заповніть форму — я звʼяжуся з вами для узгодження дати та ескізу.</p>
+      <form class="booking-form" id="booking-form">
+        <input type="hidden" name="telegramId" id="booking-telegram-id" value="">
+        <input id="booking-name" name="name" type="text" placeholder="Ваше імʼя" required>
+        <input id="booking-phone" name="phone" type="tel" placeholder="Телефон" required>
+        <input id="booking-date" name="date" type="text" placeholder="Бажана дата / час" required>
+        <textarea id="booking-note" name="note" rows="4" placeholder="Коротко про ідею або стиль"></textarea>
+        <button type="submit">Надіслати заявку</button>
+      </form>
+      <div class="booking-success" id="booking-success">Дякую! Вашу заявку отримано.</div>
+    </div>
+  </div>
 
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <button class="lb-close" id="lb-close" aria-label="Закрити">
@@ -465,6 +516,7 @@ async function loadSiteContent(){
   const C = await loadSiteContent();
 
   const seo = C.seo || {};
+  const fallbackImage = 'https://karmazin.netlify.app/images/master-at-work.jpg';
   document.title = seo.title || 'Karmazin Tattoo Studio';
   document.getElementById('meta-description').content = seo.description || '';
   document.getElementById('meta-robots').content = seo.robots || 'index, follow';
@@ -472,17 +524,20 @@ async function loadSiteContent(){
   document.getElementById('canonical-link').href = seo.canonicalUrl || 'https://karmazin.netlify.app/';
   document.getElementById('og-title').content = seo.ogTitle || seo.title || document.title;
   document.getElementById('og-description').content = seo.ogDescription || seo.description || '';
-  document.getElementById('og-image').content = seo.ogImage || 'https://karmazin.netlify.app/og-image.jpg';
+  document.getElementById('og-image').content = seo.ogImage || fallbackImage;
   document.getElementById('og-url').content = seo.ogUrl || seo.canonicalUrl || 'https://karmazin.netlify.app/';
   document.getElementById('twitter-title').content = seo.twitterTitle || seo.ogTitle || seo.title || document.title;
   document.getElementById('twitter-description').content = seo.twitterDescription || seo.ogDescription || seo.description || '';
-  document.getElementById('twitter-image').content = seo.twitterImage || seo.ogImage || 'https://karmazin.netlify.app/og-image.jpg';
+  document.getElementById('twitter-image').content = seo.twitterImage || seo.ogImage || fallbackImage;
   document.getElementById('schema-json').textContent = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'TattooParlor',
     name: 'Karmazin Tattoo Studio',
     url: seo.canonicalUrl || 'https://karmazin.netlify.app/',
-    image: seo.ogImage || 'https://karmazin.netlify.app/og-image.jpg'
+    image: seo.ogImage || fallbackImage,
+    telephone: C.phone || '',
+    address: { '@type': 'PostalAddress', addressLocality: C.contact?.city || '', addressCountry: 'UA' },
+    openingHours: C.booking?.workHours || ''
   });
 
   const root = document.documentElement.style;
@@ -493,6 +548,7 @@ async function loadSiteContent(){
   root.setProperty('--bone', C.theme.bone);
 
   document.getElementById('nav-instagram').href = C.instagramUrl;
+  document.getElementById('nav-instagram-mobile').href = C.instagramUrl;
 
   const navPhone = document.getElementById('nav-phone');
   document.getElementById('nav-phone-text').textContent = C.phone;
@@ -592,6 +648,37 @@ async function loadSiteContent(){
     if(e.key === 'ArrowLeft') prevLightbox();
   });
 
+  let lbTouchStartX = 0, lbTouchStartY = 0;
+  const lightboxMedia = document.querySelector('.lightbox-media');
+  lightboxMedia.addEventListener('touchstart', e => {
+    lbTouchStartX = e.changedTouches[0].clientX;
+    lbTouchStartY = e.changedTouches[0].clientY;
+  }, { passive: true });
+  lightboxMedia.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - lbTouchStartX;
+    const dy = e.changedTouches[0].clientY - lbTouchStartY;
+    if(Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)){
+      if(dx < 0) nextLightbox(); else prevLightbox();
+    }
+  }, { passive: true });
+
+  const navEl = document.querySelector('nav');
+  const burger = document.getElementById('burger');
+  function closeMenu(){
+    navEl.classList.remove('menu-open');
+    burger.setAttribute('aria-expanded', 'false');
+  }
+  function toggleMenu(){
+    const open = navEl.classList.toggle('menu-open');
+    burger.setAttribute('aria-expanded', String(open));
+  }
+  burger.addEventListener('click', e => { e.stopPropagation(); toggleMenu(); });
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', closeMenu));
+  document.addEventListener('click', e => {
+    if(navEl.classList.contains('menu-open') && !navEl.contains(e.target)) closeMenu();
+  });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeMenu(); });
+
   document.getElementById('pricing-note').textContent = C.pricing.note;
   const pricingGrid = document.getElementById('pricing-grid');
   C.pricing.items.forEach(p => {
@@ -613,6 +700,62 @@ async function loadSiteContent(){
 
 
   document.getElementById('site-footer').textContent = C.footer;
+
+  const bookingModal = document.getElementById('booking-modal');
+  const bookingForm = document.getElementById('booking-form');
+  const bookingTelegramId = document.getElementById('booking-telegram-id');
+  const bookingSuccess = document.getElementById('booking-success');
+
+  bookingTelegramId.value = C.booking?.telegramId || '';
+
+  function openBooking(){
+    bookingModal.classList.add('open');
+    bookingModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeBooking(){
+    bookingModal.classList.remove('open');
+    bookingModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    bookingSuccess.classList.remove('show');
+    bookingForm.reset();
+  }
+
+  document.getElementById('open-booking').addEventListener('click', openBooking);
+  document.getElementById('contact-open-booking').addEventListener('click', openBooking);
+  document.getElementById('booking-close').addEventListener('click', closeBooking);
+  bookingModal.addEventListener('click', e => { if(e.target === bookingModal) closeBooking(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape' && bookingModal.classList.contains('open')) closeBooking(); });
+
+  bookingForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    const data = new FormData(bookingForm);
+    const payload = {
+      name: data.get('name'),
+      phone: data.get('phone'),
+      date: data.get('date'),
+      note: data.get('note'),
+      telegramId: data.get('telegramId') || '',
+      source: 'booking_form'
+    };
+    try {
+      const res = await fetch('/.netlify/functions/send-telegram', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) {
+        throw new Error(await res.text());
+      }
+      bookingSuccess.textContent = 'Дякую! Вашу заявку отримано.';
+      bookingSuccess.classList.add('show');
+      setTimeout(closeBooking, 1400);
+    } catch (err) {
+      console.error('Form submit error', err);
+      bookingSuccess.textContent = 'Помилка відправки. Зателефонуйте нам напряму або спробуйте ще раз.';
+      bookingSuccess.classList.add('show');
+    }
+  });
 
   const items = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries)=>{

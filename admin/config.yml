@@ -22,8 +22,26 @@ collections:
             fields:
               - { label: "Title сторінки", name: "title", widget: "string" }
               - { label: "Description", name: "description", widget: "text" }
+              - { label: "Canonical URL", name: "canonicalUrl", widget: "string" }
+              - { label: "Author", name: "author", widget: "string" }
+              - { label: "Robots", name: "robots", widget: "string" }
+              - { label: "Open Graph Title", name: "ogTitle", widget: "string" }
+              - { label: "Open Graph Description", name: "ogDescription", widget: "text" }
+              - { label: "Open Graph Image URL", name: "ogImage", widget: "string" }
+              - { label: "Open Graph URL", name: "ogUrl", widget: "string" }
+              - { label: "Twitter Title", name: "twitterTitle", widget: "string" }
+              - { label: "Twitter Description", name: "twitterDescription", widget: "text" }
+              - { label: "Twitter Image URL", name: "twitterImage", widget: "string" }
 
           - { label: "Рядок у підвалі сайту", name: "footer", widget: "string" }
+
+          - label: "Запис та контакти"
+            name: "booking"
+            widget: "object"
+            fields:
+              - { label: "Адреса", name: "address", widget: "string" }
+              - { label: "Час роботи", name: "workHours", widget: "string" }
+              - { label: "Telegram ID для повідомлень", name: "telegramId", widget: "string", hint: "Тільки числовий chat ID (наприклад 123456789), отриманий через бота. НЕ @юзернейм — бот не вміє писати в особисті повідомлення по юзернейму." }
 
           - label: "Кольори сайту"
             name: "theme"
