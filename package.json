@@ -6,7 +6,7 @@
     "build": "node build.js"
   },
   "dependencies": {
-    "@netlify/blobs": "latest",
-    "@netlify/functions": "latest"
+    "@netlify/blobs": "^10.7.9",
+    "@netlify/functions": "^5.3.0"
   }
 }
