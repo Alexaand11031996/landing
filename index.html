@@ -266,6 +266,7 @@
   .booking-panel h3{ font-size:24px; margin-bottom:12px; }
   .booking-panel p{ color:var(--bone-dim); margin-bottom:22px; }
   .booking-form{ display:grid; gap:14px; }
+  .cf-turnstile{ width:100%; max-width:100%; overflow:hidden; }
   .booking-form input, .booking-form textarea{ width:100%; padding:13px 14px; border:1px solid var(--line); background:var(--void); color:var(--bone); font:inherit; }
   .booking-form input::placeholder, .booking-form textarea::placeholder{ color:var(--smoke); }
   .booking-form button{ border:none; background:var(--crimson); color:var(--bone); padding:14px 18px; font-family:'JetBrains Mono', monospace; cursor:pointer; }
@@ -458,7 +459,7 @@
         <input id="booking-phone" name="phone" type="tel" placeholder="Телефон" required>
         <input id="booking-date" name="date" type="text" placeholder="Бажана дата / час" required>
         <textarea id="booking-note" name="note" rows="4" placeholder="Коротко про ідею або стиль"></textarea>
-        <div class="cf-turnstile" data-sitekey="0x4AAAAAAD35usPPEEwj31CO" data-theme="dark"></div>
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAD35usPPEEwj31CO" data-theme="dark" data-size="flexible"></div>
         <button type="submit">Надіслати заявку</button>
       </form>
       <div class="booking-success" id="booking-success">Дякую! Вашу заявку отримано.</div>
@@ -806,12 +807,6 @@ async function loadSiteContent(){
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.15 });
   items.forEach(i=>io.observe(i));
-
-  document.querySelectorAll('.nav-links a').forEach(a=>{
-    a.addEventListener('click', ()=>{
-      if(window.innerWidth <= 900){ document.querySelector('.nav-links').style.display='none'; }
-    });
-  });
 })();
 </script>
 
