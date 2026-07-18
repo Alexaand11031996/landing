@@ -126,6 +126,8 @@ function build() {
   html = setAttr(html, 'contact-cta', 'href', C.instagramUrl);
   html = setInner(html, 'contact-cta', escapeHtml(C.contact.ctaPrimary));
   html = setInner(html, 'contact-city', escapeHtml(C.contact.city));
+  html = setInner(html, 'contact-address', escapeHtml((C.booking && C.booking.address) || ''));
+  html = setInner(html, 'contact-workhours', escapeHtml((C.booking && C.booking.workHours) || ''));
   html = setInner(html, 'contact-format', escapeHtml(C.contact.format));
   html = setInner(html, 'contact-channel', escapeHtml(C.contact.channel));
   html = setInner(html, 'contact-sketch', escapeHtml(C.contact.sketch));

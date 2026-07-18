@@ -440,6 +440,8 @@
       </div>
       <div class="contact-card reveal">
         <div class="contact-row"><span>Місто</span><span id="contact-city"></span></div>
+        <div class="contact-row"><span>Адреса</span><span id="contact-address"></span></div>
+        <div class="contact-row"><span>Час роботи</span><span id="contact-workhours"></span></div>
         <div class="contact-row"><span>Формат</span><span id="contact-format"></span></div>
         <div class="contact-row"><span>Звʼязок</span><span id="contact-channel"></span></div>
         <div class="contact-row"><span>Ескіз</span><span id="contact-sketch"></span></div>
@@ -669,6 +671,8 @@ async function loadSiteContent(){
   contactCta.textContent = C.contact.ctaPrimary;
   contactCta.href = C.instagramUrl;
   document.getElementById('contact-city').textContent = C.contact.city;
+  document.getElementById('contact-address').textContent = C.booking?.address || '';
+  document.getElementById('contact-workhours').textContent = C.booking?.workHours || '';
   document.getElementById('contact-format').textContent = C.contact.format;
   document.getElementById('contact-channel').textContent = C.contact.channel;
   document.getElementById('contact-sketch').textContent = C.contact.sketch;
