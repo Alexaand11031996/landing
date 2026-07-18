@@ -7,19 +7,19 @@ async function runCheck() {
   const chatId = process.env.TELEGRAM_CHAT_ID;
   if (!token || !chatId) return;
 
-  const startedAt = Date.now();
-  let statusText;
+  let problemText = null;
   try {
     const res = await fetch(SITE_URL);
-    const ms = Date.now() - startedAt;
-    statusText = res.ok
-      ? `✅ Сайт живий (HTTP ${res.status}), ${ms}мс`
-      : `⚠️ Сайт відповів з помилкою (HTTP ${res.status}), ${ms}мс`;
+    if (!res.ok) {
+      problemText = `⚠️ Сайт відповів з помилкою (HTTP ${res.status})`;
+    }
   } catch (error) {
-    statusText = `🔴 Сайт НЕДОСТУПНИЙ: ${error.message}`;
+    problemText = `🔴 Сайт НЕДОСТУПНИЙ: ${error.message}`;
   }
 
-  const text = `Перевірка сайту (${new Date().toISOString()}):\n${statusText}`;
+  if (!problemText) return;
+
+  const text = `Проблема із сайтом (${new Date().toISOString()}):\n${problemText}`;
 
   await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
     method: 'POST',
