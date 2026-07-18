@@ -260,8 +260,8 @@
   .contact-row:last-child{ border-bottom:none; }
   .contact-row span:first-child{ color:var(--smoke); font-family:'JetBrains Mono', monospace; font-size:12px; text-transform:uppercase; letter-spacing:.05em;}
 
-  .booking-modal{ position:fixed; inset:0; z-index:250; background:rgba(8,7,8,0.92); display:flex; align-items:center; justify-content:center; padding:24px; opacity:0; visibility:hidden; transition:opacity .25s ease; }
-  .booking-modal.open{ opacity:1; visibility:visible; }
+  .booking-modal{ position:fixed; inset:0; z-index:250; background:rgba(8,7,8,0.92); display:flex; align-items:center; justify-content:center; padding:24px; opacity:0; pointer-events:none; transition:opacity .25s ease; }
+  .booking-modal.open{ opacity:1; pointer-events:auto; }
   .booking-panel{ width:min(560px, 100%); background:var(--ink); border:1px solid var(--line); padding:32px; position:relative; }
   .booking-panel h3{ font-size:24px; margin-bottom:12px; }
   .booking-panel p{ color:var(--bone-dim); margin-bottom:22px; }
