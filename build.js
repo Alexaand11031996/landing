@@ -5,10 +5,7 @@ const ROOT = __dirname;
 const DIST = path.join(ROOT, 'dist');
 
 const { DEFAULT_CONTENT, deepMerge } = require('./content.default.js');
-
-function escapeHtml(str) {
-  return String(str).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
-}
+const { escapeHtml, renderStyleCard, renderProcessItem, renderGalleryCell, renderPriceCard } = require('./templates.js');
 
 function setInner(html, id, value) {
   const re = new RegExp('(<[a-zA-Z0-9]+[^>]*\\bid="' + id + '"[^>]*>)([^<]*)(</)');
@@ -40,10 +37,26 @@ function copyRecursive(src, dest) {
   }
 }
 
+function warnIfEmpty(label, value) {
+  if (!value || !String(value).trim()) {
+    console.warn('Build warning: "' + label + '" is empty in content/site.json');
+  }
+}
+
+function verifyContent(C) {
+  warnIfEmpty('hero.titleLine1', C.hero && C.hero.titleLine1);
+  warnIfEmpty('phone', C.phone);
+  warnIfEmpty('instagramUrl', C.instagramUrl);
+  warnIfEmpty('master.name', C.master && C.master.name);
+  warnIfEmpty('contact.city', C.contact && C.contact.city);
+  warnIfEmpty('seo.title', C.seo && C.seo.title);
+}
+
 function build() {
   const siteJsonPath = path.join(ROOT, 'content', 'site.json');
   const siteJson = JSON.parse(fs.readFileSync(siteJsonPath, 'utf8'));
   const C = deepMerge(DEFAULT_CONTENT, siteJson);
+  verifyContent(C);
   const seo = C.seo || {};
   const fallbackImage = 'https://karmazin.netlify.app/images/master-at-work.jpg';
 
@@ -102,29 +115,11 @@ function build() {
   html = setInner(html, 'stat3-num', escapeHtml(C.master.stat3Num));
   html = setInner(html, 'stat3-label', escapeHtml(C.master.stat3Label));
 
-  const stylesHtml = C.styles.map((s, i) =>
-    `<div class="style-card"><span class="num">0${i + 1}</span><h3>${escapeHtml(s.title)}</h3><p>${escapeHtml(s.text)}</p></div>`
-  ).join('');
-  html = setInner(html, 'styles-grid', stylesHtml);
-
-  const processHtml = C.process.map((p, i) =>
-    `<div class="process-item"><div class="process-num">0${i + 1}</div><div><h3>${escapeHtml(p.title)}</h3><p>${escapeHtml(p.text)}</p></div></div>`
-  ).join('');
-  html = setInner(html, 'process-list', processHtml);
-
-  const galleryHtml = C.gallery.map((g, i) => {
-    const altText = g.caption ? `${g.caption} — авторське татуювання в Karmazin Tattoo Studio` : 'Авторське татуювання Karmazin Tattoo Studio';
-    return `<div class="gallery-cell" data-index="${i}"><img src="${escapeHtml(g.src)}" alt="${escapeHtml(altText)}" loading="lazy">
-      <div class="expand-hint"><svg viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></div>
-      <div class="cap">${escapeHtml(g.caption)}</div></div>`;
-  }).join('');
-  html = setInner(html, 'gallery-grid', galleryHtml);
-
+  html = setInner(html, 'styles-grid', C.styles.map(renderStyleCard).join(''));
+  html = setInner(html, 'process-list', C.process.map(renderProcessItem).join(''));
+  html = setInner(html, 'gallery-grid', C.gallery.map(renderGalleryCell).join(''));
   html = setInner(html, 'pricing-note', escapeHtml(C.pricing.note));
-  const pricingHtml = C.pricing.items.map(p =>
-    `<div class="price-card"><div class="p-name">${escapeHtml(p.name)}</div><div class="p-price">${escapeHtml(p.price)}</div><div class="p-note">${escapeHtml(p.note)}</div></div>`
-  ).join('');
-  html = setInner(html, 'pricing-grid', pricingHtml);
+  html = setInner(html, 'pricing-grid', C.pricing.items.map(renderPriceCard).join(''));
 
   html = setInner(html, 'contact-heading', escapeHtml(C.contact.heading));
   html = setInner(html, 'contact-text', escapeHtml(C.contact.text));
@@ -141,7 +136,7 @@ function build() {
   if (fs.existsSync(DIST)) fs.rmSync(DIST, { recursive: true, force: true });
   fs.mkdirSync(DIST, { recursive: true });
 
-  const assetsToCopy = ['images', 'admin', 'content', 'content.default.js', 'favicon.ico', 'favicon-32.png', 'apple-touch-icon.png', 'robots.txt', 'sitemap.xml'];
+  const assetsToCopy = ['images', 'admin', 'content', 'content.default.js', 'templates.js', 'favicon.ico', 'favicon-32.png', 'apple-touch-icon.png', 'robots.txt', 'sitemap.xml'];
   for (const name of assetsToCopy) {
     const src = path.join(ROOT, name);
     if (fs.existsSync(src)) copyRecursive(src, path.join(DIST, name));

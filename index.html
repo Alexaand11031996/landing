@@ -493,11 +493,8 @@
 <footer><div class="wrap" id="site-footer"></div></footer>
 
 <script src="content.default.js"></script>
+<script src="templates.js"></script>
 <script>
-function escapeHtml(str){
-  return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-}
-
 async function loadSiteContent(){
   let content = JSON.parse(JSON.stringify(DEFAULT_CONTENT));
   try{
@@ -574,36 +571,14 @@ async function loadSiteContent(){
   document.getElementById('stat3-label').textContent = C.master.stat3Label;
 
   const stylesGrid = document.getElementById('styles-grid');
-  stylesGrid.innerHTML = '';
-  C.styles.forEach((s, i) => {
-    const el = document.createElement('div');
-    el.className = 'style-card';
-    el.innerHTML = `<span class="num">0${i+1}</span><h3>${escapeHtml(s.title)}</h3><p>${escapeHtml(s.text)}</p>`;
-    stylesGrid.appendChild(el);
-  });
+  stylesGrid.innerHTML = C.styles.map(renderStyleCard).join('');
 
   const processList = document.getElementById('process-list');
-  processList.innerHTML = '';
-  C.process.forEach((p, i) => {
-    const el = document.createElement('div');
-    el.className = 'process-item';
-    el.innerHTML = `<div class="process-num">0${i+1}</div><div><h3>${escapeHtml(p.title)}</h3><p>${escapeHtml(p.text)}</p></div>`;
-    processList.appendChild(el);
-  });
+  processList.innerHTML = C.process.map(renderProcessItem).join('');
 
   const galleryGrid = document.getElementById('gallery-grid');
-  galleryGrid.innerHTML = '';
-  C.gallery.forEach((g, i) => {
-    const el = document.createElement('div');
-    el.className = 'gallery-cell';
-    el.dataset.index = i;
-    const altText = g.caption ? `${g.caption} — авторське татуювання в Karmazin Tattoo Studio` : 'Авторське татуювання Karmazin Tattoo Studio';
-    el.innerHTML = `<img src="${escapeHtml(g.src)}" alt="${escapeHtml(altText)}" loading="lazy">
-      <div class="expand-hint"><svg viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></div>
-      <div class="cap">${escapeHtml(g.caption)}</div>`;
-    el.addEventListener('click', () => openLightbox(i));
-    galleryGrid.appendChild(el);
-  });
+  galleryGrid.innerHTML = C.gallery.map(renderGalleryCell).join('');
+  galleryGrid.querySelectorAll('.gallery-cell').forEach((el, i) => el.addEventListener('click', () => openLightbox(i)));
 
   const lightbox = document.getElementById('lightbox');
   const lbImage = document.getElementById('lb-image');
@@ -686,13 +661,7 @@ async function loadSiteContent(){
 
   document.getElementById('pricing-note').textContent = C.pricing.note;
   const pricingGrid = document.getElementById('pricing-grid');
-  pricingGrid.innerHTML = '';
-  C.pricing.items.forEach(p => {
-    const el = document.createElement('div');
-    el.className = 'price-card';
-    el.innerHTML = `<div class="p-name">${escapeHtml(p.name)}</div><div class="p-price">${escapeHtml(p.price)}</div><div class="p-note">${escapeHtml(p.note)}</div>`;
-    pricingGrid.appendChild(el);
-  });
+  pricingGrid.innerHTML = C.pricing.items.map(renderPriceCard).join('');
 
   document.getElementById('contact-heading').textContent = C.contact.heading;
   document.getElementById('contact-text').textContent = C.contact.text;
