@@ -1,6 +1,3 @@
-/* KARMAZIN TATTOO — контент за замовчуванням.
-   Використовується як "аварійний" запасний варіант, якщо content/site.json
-   ще не існує або не завантажився (наприклад, перший запуск сайту). */
 const DEFAULT_CONTENT = {
   hero: {
     eyebrow: "Вільногорськ · тату за записом",
@@ -107,8 +104,6 @@ function deepMerge(base, override) {
   return (override !== undefined) ? override : base;
 }
 
-// Робить цей файл доступним і для build.js (Node, при збірці на Netlify) —
-// у браузері module не визначено, тож цей блок там просто ігнорується.
 if (typeof module !== "undefined" && module.exports) {
   module.exports = { DEFAULT_CONTENT, deepMerge };
 }

@@ -29,7 +29,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Caveat:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<!-- Netlify Identity: ловить invite/recovery токен, навіть якщо посилання відкрилось не з /admin/ -->
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script>
@@ -192,7 +191,6 @@
   .gallery-cell:hover .expand-hint{ opacity:1; }
   .gallery-cell .expand-hint svg{ width:14px; height:14px; stroke:var(--bone); fill:none; stroke-width:1.6;}
 
-  /* ---- lightbox (Instagram-style modal: фото зліва, контент справа) ---- */
   .lightbox{
     position:fixed; inset:0; z-index:200; background:rgba(8,7,8,0.92);
     display:flex; align-items:center; justify-content:center;
@@ -508,9 +506,7 @@ async function loadSiteContent(){
       const data = await res.json();
       content = deepMerge(DEFAULT_CONTENT, data);
     }
-  }catch(e){
-    // не вдалося завантажити content/site.json (наприклад, відкрито з диска без сервера) — лишаємось на дефолтних значеннях
-  }
+  }catch(e){}
   return content;
 }
 
@@ -609,7 +605,6 @@ async function loadSiteContent(){
     galleryGrid.appendChild(el);
   });
 
-  // ---- lightbox (Instagram-style: фото + контент, що редагується в адмінці) ----
   const lightbox = document.getElementById('lightbox');
   const lbImage = document.getElementById('lb-image');
   const lbCaption = document.getElementById('lb-caption');

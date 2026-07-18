@@ -1,10 +1,6 @@
 const RATE_LIMIT_MAX = 5;
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
 
-// Rate-limit — це додатковий шар захисту поверх Turnstile, не критичний.
-// Якщо @netlify/blobs з якоїсь причини недоступний або впав — тихо
-// пропускаємо перевірку (fail-open), щоб форма запису в будь-якому разі
-// продовжувала працювати.
 async function checkRateLimit(ip) {
   if (!ip) return true;
   try {

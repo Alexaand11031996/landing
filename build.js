@@ -1,14 +1,3 @@
-/*
-  Build-time pre-render: бере index.html (шаблон) + content/site.json,
-  підставляє реальний текст у HTML ще до деплою — щоб краулери й
-  соцмережі бачили готовий контент, а не порожні id-контейнери, які
-  заповнює клієнтський JS.
-
-  Клієнтський JS в index.html лишається без змін і продовжує заповнювати
-  ту ж саму розмітку тими ж значеннями після завантаження — це просто
-  "гідрація поверх" уже готового HTML, тож нічого для живих користувачів
-  і для CMS (/admin, git-gateway) не міняється.
-*/
 const fs = require('fs');
 const path = require('path');
 
@@ -28,8 +17,6 @@ function setInner(html, id, value) {
 }
 
 function setAttr(html, id, attr, value) {
-  // Матчимо весь тег окремо, а тоді міняємо атрибут усередині нього —
-  // так це працює незалежно від того, в якому порядку йдуть атрибути в тезі.
   const tagRe = new RegExp('<[a-zA-Z0-9]+\\b[^>]*\\bid="' + id + '"[^>]*>');
   const tagMatch = html.match(tagRe);
   if (!tagMatch) throw new Error('setAttr: id not found: ' + id);
@@ -62,7 +49,6 @@ function build() {
 
   let html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 
-  // --- <head> SEO ---
   html = setInner(html, 'page-title', escapeHtml(seo.title || 'Karmazin Tattoo Studio'));
   html = setAttr(html, 'meta-description', 'content', seo.description || '');
   html = setAttr(html, 'meta-robots', 'content', seo.robots || 'index, follow');
@@ -91,13 +77,11 @@ function build() {
     (m, open, _old, close) => open + JSON.stringify(schema) + close
   );
 
-  // --- header ---
   html = setAttr(html, 'nav-instagram', 'href', C.instagramUrl);
   html = setAttr(html, 'nav-instagram-mobile', 'href', C.instagramUrl);
   html = setAttr(html, 'nav-phone', 'href', 'tel:' + String(C.phone || '').replace(/[^\d+]/g, ''));
   html = setInner(html, 'nav-phone-text', escapeHtml(C.phone || ''));
 
-  // --- hero ---
   html = setInner(html, 'hero-eyebrow', escapeHtml(C.hero.eyebrow));
   html = setInner(html, 'hero-title',
     `${escapeHtml(C.hero.titleLine1)}<br>${escapeHtml(C.hero.titleLine2)}<br><em>${escapeHtml(C.hero.titleEm)}</em> ${escapeHtml(C.hero.titleLine3)}`);
@@ -108,7 +92,6 @@ function build() {
   html = setInner(html, 'hero-stamp',
     `${escapeHtml(C.hero.stampSmall)}<span class="big">${escapeHtml(C.hero.stampBig)}</span>${escapeHtml(C.hero.stampBottom)}`);
 
-  // --- master ---
   html = setInner(html, 'master-name', escapeHtml(C.master.name));
   html = setInner(html, 'master-bio1', escapeHtml(C.master.bio1));
   html = setInner(html, 'master-bio2', escapeHtml(C.master.bio2));
@@ -119,7 +102,6 @@ function build() {
   html = setInner(html, 'stat3-num', escapeHtml(C.master.stat3Num));
   html = setInner(html, 'stat3-label', escapeHtml(C.master.stat3Label));
 
-  // --- styles / process / gallery / pricing (ті самі шаблони, що й у клієнтському JS) ---
   const stylesHtml = C.styles.map((s, i) =>
     `<div class="style-card"><span class="num">0${i + 1}</span><h3>${escapeHtml(s.title)}</h3><p>${escapeHtml(s.text)}</p></div>`
   ).join('');
@@ -144,7 +126,6 @@ function build() {
   ).join('');
   html = setInner(html, 'pricing-grid', pricingHtml);
 
-  // --- contact ---
   html = setInner(html, 'contact-heading', escapeHtml(C.contact.heading));
   html = setInner(html, 'contact-text', escapeHtml(C.contact.text));
   html = setAttr(html, 'contact-cta', 'href', C.instagramUrl);
@@ -154,11 +135,9 @@ function build() {
   html = setInner(html, 'contact-channel', escapeHtml(C.contact.channel));
   html = setInner(html, 'contact-sketch', escapeHtml(C.contact.sketch));
 
-  // --- lightbox / footer ---
   html = setAttr(html, 'lb-instagram', 'href', C.instagramUrl);
   html = setInner(html, 'site-footer', escapeHtml(C.footer));
 
-  // --- зібрати dist/: копіюємо все, що реально потрібно на сайті, і кладемо готовий index.html ---
   if (fs.existsSync(DIST)) fs.rmSync(DIST, { recursive: true, force: true });
   fs.mkdirSync(DIST, { recursive: true });
 
