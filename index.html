@@ -177,6 +177,11 @@
   }
   .gallery-cell img{ width:100%; height:100%; object-fit:cover; transition:transform .4s;}
   .gallery-cell:hover img{ transform:scale(1.05); }
+  .gallery-cell.img-error img{ display:none; }
+  .gallery-cell.img-error::after{
+    content:"Фото недоступне"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:20px; color:var(--smoke); font-family:'JetBrains Mono', monospace; font-size:12px;
+  }
   .gallery-cell:hover{ border-color:var(--crimson); z-index:2;}
   .gallery-cell .cap{
     position:absolute; left:0; right:0; bottom:0; padding:12px 14px;
@@ -205,8 +210,12 @@
     transform:scale(.96); transition:transform .25s ease;
   }
   .lightbox.open .lightbox-box{ transform:scale(1); }
-  .lightbox-media{ background:var(--void); display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .lightbox-media{ background:var(--void); display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative; }
   .lightbox-media img{ width:100%; height:100%; object-fit:contain; max-height:86vh; }
+  .lightbox-media.img-error img{ display:none; }
+  .lightbox-media.img-error::after{
+    content:"Фото недоступне"; color:var(--smoke); font-family:'JetBrains Mono', monospace; font-size:13px;
+  }
   .lightbox-content{ padding:34px; display:flex; flex-direction:column; overflow-y:auto; }
   .lightbox-content .lb-eyebrow{
     font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:.15em; text-transform:uppercase;
@@ -477,7 +486,7 @@
       <svg viewBox="0 0 24 24"><path d="M9 4l8 8-8 8" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>
     </button>
     <div class="lightbox-box">
-      <div class="lightbox-media"><img id="lb-image" src="" alt=""></div>
+      <div class="lightbox-media" id="lightbox-media"><img id="lb-image" src="" alt="" onerror="document.getElementById('lightbox-media').classList.add('img-error')"></div>
       <div class="lightbox-content">
         <div class="lb-eyebrow">Karmazin Tattoo</div>
         <h3 id="lb-caption"></h3>
@@ -593,6 +602,7 @@ async function loadSiteContent(){
 
   function renderLightbox(){
     const item = C.gallery[lbIndex];
+    document.getElementById('lightbox-media').classList.remove('img-error');
     lbImage.src = item.src;
     lbImage.alt = item.caption;
     lbCaption.textContent = item.caption;

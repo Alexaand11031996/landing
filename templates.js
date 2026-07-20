@@ -12,7 +12,7 @@ function renderProcessItem(p, i) {
 
 function renderGalleryCell(g, i) {
   const altText = g.caption ? `${g.caption} — авторське татуювання в Karmazin Tattoo Studio` : 'Авторське татуювання Karmazin Tattoo Studio';
-  return `<div class="gallery-cell" data-index="${i}"><img src="${escapeHtml(g.src)}" alt="${escapeHtml(altText)}" loading="lazy">
+  return `<div class="gallery-cell" data-index="${i}"><img src="${escapeHtml(g.src)}" alt="${escapeHtml(altText)}" loading="lazy" onerror="this.parentElement.classList.add('img-error')">
       <div class="expand-hint"><svg viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></div>
       <div class="cap">${escapeHtml(g.caption)}</div></div>`;
 }
