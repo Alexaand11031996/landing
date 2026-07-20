@@ -73,6 +73,12 @@ function build() {
 
   let html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 
+  const embeddedJson = JSON.stringify(C).replace(/</g, '\\u003c');
+  html = html.replace(
+    /(<script type="application\/json" id="site-content-data">)([^<]*)(<\/script>)/,
+    (m, open, _old, close) => open + embeddedJson + close
+  );
+
   html = setInner(html, 'page-title', escapeHtml(seo.title || 'Karmazin Tattoo Studio'));
   html = setAttr(html, 'meta-description', 'content', seo.description || '');
   html = setAttr(html, 'meta-robots', 'content', seo.robots || 'index, follow');
