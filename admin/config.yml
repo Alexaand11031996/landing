@@ -100,7 +100,7 @@ collections:
             name: "gallery"
             widget: "list"
             fields:
-              - { label: "Фото", name: "src", widget: "image" }
+              - { label: "Фото", name: "src", widget: "image", hint: "Не видаляйте це зображення з медіатеки, поки воно використовується тут — інакше фото зникне з сайту." }
               - { label: "Підпис (короткий, під фото)", name: "caption", widget: "string" }
               - { label: "Опис (показується при відкритті фото на весь екран)", name: "description", widget: "text", required: false }
 

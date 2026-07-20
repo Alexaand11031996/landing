@@ -52,11 +52,22 @@ function verifyContent(C) {
   warnIfEmpty('seo.title', C.seo && C.seo.title);
 }
 
+function verifyGalleryImages(C) {
+  (C.gallery || []).forEach(item => {
+    if (!item.src) return;
+    const filePath = path.join(ROOT, item.src);
+    if (!fs.existsSync(filePath)) {
+      console.warn('Build warning: gallery image file is missing on disk: ' + item.src);
+    }
+  });
+}
+
 function build() {
   const siteJsonPath = path.join(ROOT, 'content', 'site.json');
   const siteJson = JSON.parse(fs.readFileSync(siteJsonPath, 'utf8'));
   const C = deepMerge(DEFAULT_CONTENT, siteJson);
   verifyContent(C);
+  verifyGalleryImages(C);
   const seo = C.seo || {};
   const fallbackImage = 'https://karmazin.netlify.app/images/master-at-work.jpg';
 
