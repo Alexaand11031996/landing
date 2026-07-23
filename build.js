@@ -97,7 +97,7 @@ async function build() {
   if (fs.existsSync(DIST)) fs.rmSync(DIST, { recursive: true, force: true });
   fs.mkdirSync(DIST, { recursive: true });
 
-  const assetsToCopy = ['images', 'admin', 'content', 'content.default.js', 'templates.js', 'favicon.ico', 'favicon-32.png', 'apple-touch-icon.png', 'robots.txt', 'sitemap.xml'];
+  const assetsToCopy = ['images', 'admin', 'content', 'content.default.js', 'templates.js', 'favicon.ico', 'favicon-32.png', 'apple-touch-icon.png', 'robots.txt', 'sitemap.xml', 'googlec5a8428c6a8d807b.html'];
   for (const name of assetsToCopy) {
     const src = path.join(ROOT, name);
     if (fs.existsSync(src)) copyRecursive(src, path.join(DIST, name));
