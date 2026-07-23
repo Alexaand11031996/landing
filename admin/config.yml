@@ -14,6 +14,8 @@ collections:
         file: "content/site.json"
         fields:
           - { label: "Посилання на Instagram", name: "instagramUrl", widget: "string" }
+          - { label: "Посилання на Viber", name: "viberUrl", widget: "string", required: false, hint: "Наприклад: viber://chat?number=%2B380507338644. Якщо залишити порожнім — кнопка Viber на сайті не показується." }
+          - { label: "Посилання на Telegram", name: "telegramUrl", widget: "string", required: false, hint: "Наприклад: https://t.me/your_username. Якщо залишити порожнім — кнопка Telegram на сайті не показується." }
           - { label: "Номер телефону (в шапці сайту)", name: "phone", widget: "string" }
 
           - label: "SEO"

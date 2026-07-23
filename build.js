@@ -24,6 +24,14 @@ function setAttr(html, id, attr, value) {
   return html.slice(0, tagMatch.index) + newTag + html.slice(tagMatch.index + tag.length);
 }
 
+function setOptionalLink(html, id, url) {
+  if (url && String(url).trim()) {
+    html = setAttr(html, id, 'href', url);
+    html = setAttr(html, id, 'style', '');
+  }
+  return html;
+}
+
 function copyRecursive(src, dest) {
   const stat = fs.statSync(src);
   if (stat.isDirectory()) {
@@ -206,6 +214,8 @@ async function build() {
   html = setInner(html, 'contact-text', escapeHtml(C.contact.text));
   html = setAttr(html, 'contact-cta', 'href', C.instagramUrl);
   html = setInner(html, 'contact-cta', escapeHtml(C.contact.ctaPrimary));
+  html = setOptionalLink(html, 'contact-cta-viber', C.viberUrl);
+  html = setOptionalLink(html, 'contact-cta-telegram', C.telegramUrl);
   html = setInner(html, 'contact-city', escapeHtml(C.contact.city));
   html = setInner(html, 'contact-address', escapeHtml((C.booking && C.booking.address) || ''));
   html = setInner(html, 'contact-workhours', escapeHtml((C.booking && C.booking.workHours) || ''));

@@ -451,6 +451,8 @@
         <div class="cta-row">
           <a class="btn primary" id="contact-cta" href="#" target="_blank" rel="noopener"></a>
           <button class="btn ghost" id="contact-open-booking" type="button">Записатися</button>
+          <a class="btn ghost" id="contact-cta-viber" href="#" target="_blank" rel="noopener" style="display:none">Viber</a>
+          <a class="btn ghost" id="contact-cta-telegram" href="#" target="_blank" rel="noopener" style="display:none">Telegram</a>
         </div>
       </div>
       <div class="contact-card reveal">
@@ -701,6 +703,10 @@ async function loadSiteContent(){
   const contactCta = document.getElementById('contact-cta');
   contactCta.textContent = C.contact.ctaPrimary;
   contactCta.href = C.instagramUrl;
+  const viberCta = document.getElementById('contact-cta-viber');
+  if (C.viberUrl) { viberCta.href = C.viberUrl; viberCta.style.display = ''; }
+  const telegramCta = document.getElementById('contact-cta-telegram');
+  if (C.telegramUrl) { telegramCta.href = C.telegramUrl; telegramCta.style.display = ''; }
   document.getElementById('contact-city').textContent = C.contact.city;
   document.getElementById('contact-address').textContent = C.booking?.address || '';
   document.getElementById('contact-workhours').textContent = C.booking?.workHours || '';
