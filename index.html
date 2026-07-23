@@ -286,6 +286,9 @@
   .booking-success.show{ display:block; }
 
   footer{ padding:40px 0; text-align:center; color:var(--smoke); font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:.04em;}
+  .footer-legal{ display:flex; justify-content:center; gap:18px; flex-wrap:wrap; margin-top:14px; font-size:11px; color:var(--smoke); }
+  .footer-legal a{ color:var(--smoke); text-decoration:underline; }
+  .footer-legal a:hover{ color:var(--bone-dim); }
 
   @media (max-width: 900px){
     .nav-links{ display:none; }
@@ -508,7 +511,13 @@
 
 </main>
 
-<footer><div class="wrap" id="site-footer"></div></footer>
+<footer>
+  <div class="wrap" id="site-footer"></div>
+  <div class="wrap footer-legal">
+    <a href="/privacy.html">Політика конфіденційності</a>
+    <span>© <span id="footer-year">2026</span> Karmazin Tattoo. Всі права захищені.</span>
+  </div>
+</footer>
 
 <script type="application/json" id="site-content-data"></script>
 <script src="content.default.js"></script>
@@ -701,6 +710,7 @@ async function loadSiteContent(){
 
 
   document.getElementById('site-footer').textContent = C.footer;
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
 
   const bookingModal = document.getElementById('booking-modal');
   const bookingForm = document.getElementById('booking-form');
