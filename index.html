@@ -276,6 +276,9 @@
   .cf-turnstile{ width:100%; max-width:100%; overflow:hidden; }
   .booking-form input, .booking-form textarea{ width:100%; padding:13px 14px; border:1px solid var(--line); background:var(--void); color:var(--bone); font:inherit; line-height:normal; }
   .booking-form input::placeholder, .booking-form textarea::placeholder{ color:var(--smoke); }
+  .consent-row{ display:flex; align-items:flex-start; gap:10px; font-size:12.5px; color:var(--bone-dim); cursor:pointer; }
+  .consent-row input{ width:auto; margin-top:3px; flex-shrink:0; accent-color:var(--crimson); }
+  .consent-row a{ color:var(--crimson-bright); }
   .booking-form button{ border:none; background:var(--crimson); color:var(--bone); padding:14px 18px; font-family:'JetBrains Mono', monospace; cursor:pointer; }
   .booking-form button:hover{ background:var(--crimson-bright); }
   .booking-close{ position:absolute; top:14px; right:14px; background:none; border:none; color:var(--bone); cursor:pointer; font-size:24px; }
@@ -468,6 +471,10 @@
         <input id="booking-phone" name="phone" type="tel" placeholder="Телефон" required>
         <input id="booking-date" name="date" type="text" placeholder="Бажана дата / час" required>
         <textarea id="booking-note" name="note" rows="4" placeholder="Коротко про ідею або стиль"></textarea>
+        <label class="consent-row">
+          <input type="checkbox" id="booking-consent" name="consent" required>
+          <span>Погоджуюсь на обробку моїх персональних даних згідно з <a href="/privacy.html" target="_blank" rel="noopener">Політикою конфіденційності</a></span>
+        </label>
         <div class="cf-turnstile" data-sitekey="0x4AAAAAAD35usPPEEwj31CO" data-theme="dark" data-size="flexible"></div>
         <button type="submit">Надіслати заявку</button>
       </form>
