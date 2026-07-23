@@ -5,3 +5,9 @@
 
 [dev]
   functions = "netlify/functions"
+
+[[redirects]]
+  from = "https://karmazin.netlify.app/*"
+  to = "https://karmazin.space/:splat"
+  status = 301
+  force = true
