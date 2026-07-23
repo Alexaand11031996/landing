@@ -62,7 +62,30 @@ function verifyGalleryImages(C) {
   });
 }
 
-function build() {
+const HEIC_RE = /\.(heic|heif)$/i;
+
+async function convertHeicImages(C) {
+  const heicConvert = require('heic-convert');
+  for (const item of (C.gallery || [])) {
+    if (!item.src || !HEIC_RE.test(item.src)) continue;
+    const srcPath = path.join(ROOT, item.src);
+    if (!fs.existsSync(srcPath)) continue;
+    try {
+      const inputBuffer = fs.readFileSync(srcPath);
+      const outputBuffer = await heicConvert({ buffer: inputBuffer, format: 'JPEG', quality: 0.9 });
+      const newSrc = item.src.replace(HEIC_RE, '.jpg');
+      const destPath = path.join(DIST, newSrc);
+      fs.mkdirSync(path.dirname(destPath), { recursive: true });
+      fs.writeFileSync(destPath, outputBuffer);
+      console.log('Converted HEIC/HEIF image for browser compatibility: ' + item.src + ' -> ' + newSrc);
+      item.src = newSrc;
+    } catch (err) {
+      console.warn('Build warning: failed to convert HEIC image ' + item.src + ': ' + err.message);
+    }
+  }
+}
+
+async function build() {
   const siteJsonPath = path.join(ROOT, 'content', 'site.json');
   const siteJson = JSON.parse(fs.readFileSync(siteJsonPath, 'utf8'));
   const C = deepMerge(DEFAULT_CONTENT, siteJson);
@@ -70,6 +93,17 @@ function build() {
   verifyGalleryImages(C);
   const seo = C.seo || {};
   const fallbackImage = 'https://karmazin.netlify.app/images/master-at-work.jpg';
+
+  if (fs.existsSync(DIST)) fs.rmSync(DIST, { recursive: true, force: true });
+  fs.mkdirSync(DIST, { recursive: true });
+
+  const assetsToCopy = ['images', 'admin', 'content', 'content.default.js', 'templates.js', 'favicon.ico', 'favicon-32.png', 'apple-touch-icon.png', 'robots.txt', 'sitemap.xml'];
+  for (const name of assetsToCopy) {
+    const src = path.join(ROOT, name);
+    if (fs.existsSync(src)) copyRecursive(src, path.join(DIST, name));
+  }
+
+  await convertHeicImages(C);
 
   let html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 
@@ -152,18 +186,12 @@ function build() {
   html = setAttr(html, 'lb-instagram', 'href', C.instagramUrl);
   html = setInner(html, 'site-footer', escapeHtml(C.footer));
 
-  if (fs.existsSync(DIST)) fs.rmSync(DIST, { recursive: true, force: true });
-  fs.mkdirSync(DIST, { recursive: true });
-
-  const assetsToCopy = ['images', 'admin', 'content', 'content.default.js', 'templates.js', 'favicon.ico', 'favicon-32.png', 'apple-touch-icon.png', 'robots.txt', 'sitemap.xml'];
-  for (const name of assetsToCopy) {
-    const src = path.join(ROOT, name);
-    if (fs.existsSync(src)) copyRecursive(src, path.join(DIST, name));
-  }
-
   fs.writeFileSync(path.join(DIST, 'index.html'), html, 'utf8');
 
   console.log('Build OK: dist/ generated with pre-rendered content from content/site.json');
 }
 
-build();
+build().catch(err => {
+  console.error(err);
+  process.exit(1);
+});
