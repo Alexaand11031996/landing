@@ -85,6 +85,35 @@ async function convertHeicImages(C) {
   }
 }
 
+const GALLERY_MAX_WIDTH = 1600;
+
+async function optimizeGalleryImages(C) {
+  const sharp = require('sharp');
+  for (const item of (C.gallery || [])) {
+    if (!item.src) continue;
+    const filePath = path.join(DIST, item.src);
+    if (!fs.existsSync(filePath)) continue;
+    try {
+      const inputBuffer = fs.readFileSync(filePath);
+      const ext = path.extname(item.src).toLowerCase();
+      let pipeline = sharp(inputBuffer).rotate();
+      const meta = await pipeline.metadata();
+      if (meta.width && meta.width > GALLERY_MAX_WIDTH) {
+        pipeline = pipeline.resize({ width: GALLERY_MAX_WIDTH });
+      }
+      const outputBuffer = ext === '.png'
+        ? await pipeline.png({ compressionLevel: 9 }).toBuffer()
+        : await pipeline.jpeg({ quality: 82, mozjpeg: true }).toBuffer();
+      if (outputBuffer.length < inputBuffer.length) {
+        fs.writeFileSync(filePath, outputBuffer);
+        console.log('Optimized gallery image: ' + item.src + ' (' + Math.round(inputBuffer.length / 1024) + 'KB -> ' + Math.round(outputBuffer.length / 1024) + 'KB)');
+      }
+    } catch (err) {
+      console.warn('Build warning: failed to optimize image ' + item.src + ': ' + err.message);
+    }
+  }
+}
+
 async function build() {
   const siteJsonPath = path.join(ROOT, 'content', 'site.json');
   const siteJson = JSON.parse(fs.readFileSync(siteJsonPath, 'utf8'));
@@ -104,6 +133,7 @@ async function build() {
   }
 
   await convertHeicImages(C);
+  await optimizeGalleryImages(C);
 
   let html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 
