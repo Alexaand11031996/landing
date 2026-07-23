@@ -92,7 +92,7 @@ async function build() {
   verifyContent(C);
   verifyGalleryImages(C);
   const seo = C.seo || {};
-  const fallbackImage = 'https://karmazin.netlify.app/images/master-at-work.jpg';
+  const fallbackImage = 'https://karmazin.space/images/master-at-work.jpg';
 
   if (fs.existsSync(DIST)) fs.rmSync(DIST, { recursive: true, force: true });
   fs.mkdirSync(DIST, { recursive: true });
@@ -117,11 +117,11 @@ async function build() {
   html = setAttr(html, 'meta-description', 'content', seo.description || '');
   html = setAttr(html, 'meta-robots', 'content', seo.robots || 'index, follow');
   html = setAttr(html, 'meta-author', 'content', seo.author || 'Karmazin Tattoo Studio');
-  html = setAttr(html, 'canonical-link', 'href', seo.canonicalUrl || 'https://karmazin.netlify.app/');
+  html = setAttr(html, 'canonical-link', 'href', seo.canonicalUrl || 'https://karmazin.space/');
   html = setAttr(html, 'og-title', 'content', seo.ogTitle || seo.title || 'Karmazin Tattoo Studio');
   html = setAttr(html, 'og-description', 'content', seo.ogDescription || seo.description || '');
   html = setAttr(html, 'og-image', 'content', seo.ogImage || fallbackImage);
-  html = setAttr(html, 'og-url', 'content', seo.ogUrl || seo.canonicalUrl || 'https://karmazin.netlify.app/');
+  html = setAttr(html, 'og-url', 'content', seo.ogUrl || seo.canonicalUrl || 'https://karmazin.space/');
   html = setAttr(html, 'twitter-title', 'content', seo.twitterTitle || seo.ogTitle || seo.title || 'Karmazin Tattoo Studio');
   html = setAttr(html, 'twitter-description', 'content', seo.twitterDescription || seo.ogDescription || seo.description || '');
   html = setAttr(html, 'twitter-image', 'content', seo.twitterImage || seo.ogImage || fallbackImage);
@@ -130,7 +130,7 @@ async function build() {
     '@context': 'https://schema.org',
     '@type': 'TattooParlor',
     name: 'Karmazin Tattoo Studio',
-    url: seo.canonicalUrl || 'https://karmazin.netlify.app/',
+    url: seo.canonicalUrl || 'https://karmazin.space/',
     image: seo.ogImage || fallbackImage,
     telephone: C.phone || '',
     address: { '@type': 'PostalAddress', addressLocality: (C.contact && C.contact.city) || '', addressCountry: 'UA' },

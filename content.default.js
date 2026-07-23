@@ -15,16 +15,16 @@ const DEFAULT_CONTENT = {
   seo: {
     title: "Karmazin Tattoo Studio",
     description: "Авторські тату, чорна лінія, реалізм та ілюстративні сюжети у Вільногірську. Запис на сеанс у тату-студії Karmazin Tattoo.",
-    canonicalUrl: "https://karmazin.netlify.app/",
+    canonicalUrl: "https://karmazin.space/",
     author: "Karmazin Tattoo Studio",
     robots: "index, follow",
     ogTitle: "Karmazin Tattoo Studio",
     ogDescription: "Авторське татуювання та індивідуальні ескізи.",
-    ogImage: "https://karmazin.netlify.app/images/master-at-work.jpg",
-    ogUrl: "https://karmazin.netlify.app/",
+    ogImage: "https://karmazin.space/images/master-at-work.jpg",
+    ogUrl: "https://karmazin.space/",
     twitterTitle: "Karmazin Tattoo Studio",
     twitterDescription: "Авторське татуювання",
-    twitterImage: "https://karmazin.netlify.app/images/master-at-work.jpg"
+    twitterImage: "https://karmazin.space/images/master-at-work.jpg"
   },
   master: {
     name: "Анатолій Кармазін",

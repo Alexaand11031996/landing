@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://karmazin.netlify.app/sitemap.xml
+Sitemap: https://karmazin.space/sitemap.xml

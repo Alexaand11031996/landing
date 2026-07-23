@@ -1,6 +1,6 @@
 const { schedule } = require('@netlify/functions');
 
-const SITE_URL = 'https://karmazin.netlify.app/';
+const SITE_URL = 'https://karmazin.space/';
 
 async function runCheck() {
   const token = process.env.TELEGRAM_BOT_TOKEN;

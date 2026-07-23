@@ -7,22 +7,22 @@
 <meta name="description" id="meta-description" content="Karmazin Tattoo Studio — професійне татуювання з індивідуальним підходом. Авторські ескізи, перекриття старих тату, корекція та татуювання в різних стилях. Безпечно, якісно та з увагою до кожної деталі.">
 <meta name="robots" id="meta-robots" content="index, follow">
 <meta name="author" id="meta-author" content="Karmazin Tattoo Studio">
-<link rel="canonical" id="canonical-link" href="https://karmazin.netlify.app/">
+<link rel="canonical" id="canonical-link" href="https://karmazin.space/">
 <meta property="og:site_name" content="Karmazin Tattoo Studio">
 <meta property="og:locale" content="uk_UA">
 <meta property="og:title" id="og-title" content="Karmazin Tattoo Studio">
 <meta property="og:description" id="og-description" content="Авторське татуювання та індивідуальні ескізи.">
-<meta property="og:image" id="og-image" content="https://karmazin.netlify.app/images/master-at-work.jpg">
+<meta property="og:image" id="og-image" content="https://karmazin.space/images/master-at-work.jpg">
 <meta property="og:image:width" content="640">
 <meta property="og:image:height" content="853">
 <meta property="og:type" content="website">
-<meta property="og:url" id="og-url" content="https://karmazin.netlify.app/">
+<meta property="og:url" id="og-url" content="https://karmazin.space/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" id="twitter-title" content="Karmazin Tattoo Studio">
 <meta name="twitter:description" id="twitter-description" content="Авторське татуювання">
-<meta name="twitter:image" id="twitter-image" content="https://karmazin.netlify.app/images/master-at-work.jpg">
+<meta name="twitter:image" id="twitter-image" content="https://karmazin.space/images/master-at-work.jpg">
 <meta name="theme-color" content="#0d0c0e">
-<script type="application/ld+json" id="schema-json">{"@context":"https://schema.org","@type":"TattooParlor","name":"Karmazin Tattoo Studio","url":"https://karmazin.netlify.app/","image":"https://karmazin.netlify.app/images/master-at-work.jpg","telephone":"+380 50 123 45 67","address":{"@type":"PostalAddress","addressLocality":"Вільногірськ","addressCountry":"UA"},"openingHours":"Mo-Fr 10:00-19:00"}</script>
+<script type="application/ld+json" id="schema-json">{"@context":"https://schema.org","@type":"TattooParlor","name":"Karmazin Tattoo Studio","url":"https://karmazin.space/","image":"https://karmazin.space/images/master-at-work.jpg","telephone":"+380 50 123 45 67","address":{"@type":"PostalAddress","addressLocality":"Вільногірськ","addressCountry":"UA"},"openingHours":"Mo-Fr 10:00-19:00"}</script>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -527,16 +527,16 @@ async function loadSiteContent(){
   const C = await loadSiteContent();
 
   const seo = C.seo || {};
-  const fallbackImage = 'https://karmazin.netlify.app/images/master-at-work.jpg';
+  const fallbackImage = 'https://karmazin.space/images/master-at-work.jpg';
   document.title = seo.title || 'Karmazin Tattoo Studio';
   document.getElementById('meta-description').content = seo.description || '';
   document.getElementById('meta-robots').content = seo.robots || 'index, follow';
   document.getElementById('meta-author').content = seo.author || 'Karmazin Tattoo Studio';
-  document.getElementById('canonical-link').href = seo.canonicalUrl || 'https://karmazin.netlify.app/';
+  document.getElementById('canonical-link').href = seo.canonicalUrl || 'https://karmazin.space/';
   document.getElementById('og-title').content = seo.ogTitle || seo.title || document.title;
   document.getElementById('og-description').content = seo.ogDescription || seo.description || '';
   document.getElementById('og-image').content = seo.ogImage || fallbackImage;
-  document.getElementById('og-url').content = seo.ogUrl || seo.canonicalUrl || 'https://karmazin.netlify.app/';
+  document.getElementById('og-url').content = seo.ogUrl || seo.canonicalUrl || 'https://karmazin.space/';
   document.getElementById('twitter-title').content = seo.twitterTitle || seo.ogTitle || seo.title || document.title;
   document.getElementById('twitter-description').content = seo.twitterDescription || seo.ogDescription || seo.description || '';
   document.getElementById('twitter-image').content = seo.twitterImage || seo.ogImage || fallbackImage;
@@ -544,7 +544,7 @@ async function loadSiteContent(){
     '@context': 'https://schema.org',
     '@type': 'TattooParlor',
     name: 'Karmazin Tattoo Studio',
-    url: seo.canonicalUrl || 'https://karmazin.netlify.app/',
+    url: seo.canonicalUrl || 'https://karmazin.space/',
     image: seo.ogImage || fallbackImage,
     telephone: C.phone || '',
     address: { '@type': 'PostalAddress', addressLocality: C.contact?.city || '', addressCountry: 'UA' },
