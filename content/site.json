@@ -65,6 +65,7 @@
     "crimsonBright": "#006666",
     "bone": "#e7dcc9"
   },
+  "telegramUrl": "@karmazin_tattoo",
   "phone": "+380507338644",
   "process": [
     {
@@ -146,6 +147,7 @@
       "caption": "лайнворк"
     }
   ],
+  "viberUrl": "",
   "booking": {
     "address": "Вільногірськ, Україна",
     "workHours": "Пн-Нд: 11:00–20:00"
@@ -178,7 +180,5 @@
     "canonicalUrl": "https://karmazin.space/",
     "description": "Karmazin Tattoo Spase — тату-простір у Вільногірську. Авторські ескізи, запис на сеанс, перекриття старих тату, роботи в різних стилях."
   },
-  "instagramUrl": "https://www.instagram.com/karmazin_tattoo/",
-  "viberUrl": "",
-  "telegramUrl": ""
+  "instagramUrl": "https://www.instagram.com/karmazin_tattoo/"
 }
