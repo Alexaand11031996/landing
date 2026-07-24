@@ -33,6 +33,10 @@
 
 .preview-root .p-master{ display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:start; }
 .preview-root .p-master p{ color:var(--bone-dim); margin-bottom:14px; font-size:14.5px; }
+.preview-root .p-master-photo{ aspect-ratio:4/5; border:1px solid var(--line); overflow:hidden; background:var(--ink); }
+.preview-root .p-master-photo img{ width:100%; height:100%; object-fit:cover; }
+.preview-root .p-master-photo.img-missing{ display:flex; align-items:center; justify-content:center; }
+.preview-root .p-master-photo.img-missing::after{ content:"Немає фото"; color:var(--smoke); font-family:'JetBrains Mono', monospace; font-size:11px; }
 .preview-root .p-stats{ display:flex; gap:28px; margin-top:20px; flex-wrap:wrap; }
 .preview-root .p-stat b{ font-family:'Oswald',sans-serif; font-size:26px; color:var(--crimson-bright); display:block; }
 .preview-root .p-stat span{ font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:.05em; color:var(--smoke); text-transform:uppercase; }

@@ -70,12 +70,17 @@ function verifyContent(C) {
   warnIfEmpty('seo.title', C.seo && C.seo.title);
 }
 
+function collectImageRefs(C) {
+  const refs = (C.gallery || []).filter(item => item.src).map(item => ({ item, key: 'src' }));
+  if (C.master && C.master.photo) refs.push({ item: C.master, key: 'photo' });
+  return refs;
+}
+
 function verifyGalleryImages(C) {
-  (C.gallery || []).forEach(item => {
-    if (!item.src) return;
-    const filePath = path.join(ROOT, item.src);
+  collectImageRefs(C).forEach(({ item, key }) => {
+    const filePath = path.join(ROOT, item[key]);
     if (!fs.existsSync(filePath)) {
-      console.warn('Build warning: gallery image file is missing on disk: ' + item.src);
+      console.warn('Build warning: image file is missing on disk: ' + item[key]);
     }
   });
 }
@@ -84,50 +89,51 @@ const HEIC_RE = /\.(heic|heif)$/i;
 
 async function convertHeicImages(C) {
   const heicConvert = require('heic-convert');
-  for (const item of (C.gallery || [])) {
-    if (!item.src || !HEIC_RE.test(item.src)) continue;
-    const srcPath = path.join(ROOT, item.src);
+  for (const { item, key } of collectImageRefs(C)) {
+    const src = item[key];
+    if (!HEIC_RE.test(src)) continue;
+    const srcPath = path.join(ROOT, src);
     if (!fs.existsSync(srcPath)) continue;
     try {
       const inputBuffer = fs.readFileSync(srcPath);
       const outputBuffer = await heicConvert({ buffer: inputBuffer, format: 'JPEG', quality: 0.9 });
-      const newSrc = item.src.replace(HEIC_RE, '.jpg');
+      const newSrc = src.replace(HEIC_RE, '.jpg');
       const destPath = path.join(DIST, newSrc);
       fs.mkdirSync(path.dirname(destPath), { recursive: true });
       fs.writeFileSync(destPath, outputBuffer);
-      console.log('Converted HEIC/HEIF image for browser compatibility: ' + item.src + ' -> ' + newSrc);
-      item.src = newSrc;
+      console.log('Converted HEIC/HEIF image for browser compatibility: ' + src + ' -> ' + newSrc);
+      item[key] = newSrc;
     } catch (err) {
-      console.warn('Build warning: failed to convert HEIC image ' + item.src + ': ' + err.message);
+      console.warn('Build warning: failed to convert HEIC image ' + src + ': ' + err.message);
     }
   }
 }
 
-const GALLERY_MAX_WIDTH = 1600;
+const IMAGE_MAX_WIDTH = 1600;
 
-async function optimizeGalleryImages(C) {
+async function optimizeImages(C) {
   const sharp = require('sharp');
-  for (const item of (C.gallery || [])) {
-    if (!item.src) continue;
-    const filePath = path.join(DIST, item.src);
+  for (const { item, key } of collectImageRefs(C)) {
+    const src = item[key];
+    const filePath = path.join(DIST, src);
     if (!fs.existsSync(filePath)) continue;
     try {
       const inputBuffer = fs.readFileSync(filePath);
-      const ext = path.extname(item.src).toLowerCase();
+      const ext = path.extname(src).toLowerCase();
       let pipeline = sharp(inputBuffer).rotate();
       const meta = await pipeline.metadata();
-      if (meta.width && meta.width > GALLERY_MAX_WIDTH) {
-        pipeline = pipeline.resize({ width: GALLERY_MAX_WIDTH });
+      if (meta.width && meta.width > IMAGE_MAX_WIDTH) {
+        pipeline = pipeline.resize({ width: IMAGE_MAX_WIDTH });
       }
       const outputBuffer = ext === '.png'
         ? await pipeline.png({ compressionLevel: 9 }).toBuffer()
         : await pipeline.jpeg({ quality: 82, mozjpeg: true }).toBuffer();
       if (outputBuffer.length < inputBuffer.length) {
         fs.writeFileSync(filePath, outputBuffer);
-        console.log('Optimized gallery image: ' + item.src + ' (' + Math.round(inputBuffer.length / 1024) + 'KB -> ' + Math.round(outputBuffer.length / 1024) + 'KB)');
+        console.log('Optimized image: ' + src + ' (' + Math.round(inputBuffer.length / 1024) + 'KB -> ' + Math.round(outputBuffer.length / 1024) + 'KB)');
       }
     } catch (err) {
-      console.warn('Build warning: failed to optimize image ' + item.src + ': ' + err.message);
+      console.warn('Build warning: failed to optimize image ' + src + ': ' + err.message);
     }
   }
 }
@@ -139,7 +145,7 @@ async function build() {
   verifyContent(C);
   verifyGalleryImages(C);
   const seo = C.seo || {};
-  const fallbackImage = 'https://karmazin.space/images/master-at-work.jpg';
+  const fallbackImage = 'https://karmazin.space/' + (C.master.photo || 'images/master-at-work.jpg');
 
   if (fs.existsSync(DIST)) fs.rmSync(DIST, { recursive: true, force: true });
   fs.mkdirSync(DIST, { recursive: true });
@@ -151,7 +157,7 @@ async function build() {
   }
 
   await convertHeicImages(C);
-  await optimizeGalleryImages(C);
+  await optimizeImages(C);
 
   let html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 
@@ -204,6 +210,7 @@ async function build() {
   html = setInner(html, 'hero-stamp',
     `${escapeHtml(C.hero.stampSmall)}<span class="big">${escapeHtml(C.hero.stampBig)}</span>${escapeHtml(C.hero.stampBottom)}`);
 
+  html = setAttr(html, 'master-photo', 'src', C.master.photo || 'images/master-at-work.jpg');
   html = setInner(html, 'master-name', escapeHtml(C.master.name));
   html = setInner(html, 'master-bio1', escapeHtml(C.master.bio1));
   html = setInner(html, 'master-bio2', escapeHtml(C.master.bio2));

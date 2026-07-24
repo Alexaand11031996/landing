@@ -39,11 +39,11 @@ collections:
               - { label: "Robots", name: "robots", widget: "string" }
               - { label: "Open Graph Title", name: "ogTitle", widget: "string" }
               - { label: "Open Graph Description", name: "ogDescription", widget: "text" }
-              - { label: "Open Graph Image URL", name: "ogImage", widget: "string" }
+              - { label: "Open Graph Image URL", name: "ogImage", widget: "string", required: false, hint: "Залиште порожнім — автоматично використається фото майстра з розділу «Майстер»." }
               - { label: "Open Graph URL", name: "ogUrl", widget: "string" }
               - { label: "Twitter Title", name: "twitterTitle", widget: "string" }
               - { label: "Twitter Description", name: "twitterDescription", widget: "text" }
-              - { label: "Twitter Image URL", name: "twitterImage", widget: "string" }
+              - { label: "Twitter Image URL", name: "twitterImage", widget: "string", required: false, hint: "Залиште порожнім — автоматично використається фото майстра з розділу «Майстер»." }
 
           - { label: "Рядок у підвалі сайту", name: "footer", widget: "string" }
 
@@ -84,6 +84,7 @@ collections:
             name: "master"
             widget: "object"
             fields:
+              - { label: "Фото майстра", name: "photo", widget: "image", hint: "Це фото також автоматично використовується як картинка попереднього перегляду, коли посилання на сайт ділиться в Instagram/Telegram/Viber тощо (og:image)." }
               - { label: "Імʼя", name: "name", widget: "string" }
               - { label: "Абзац 1", name: "bio1", widget: "text" }
               - { label: "Абзац 2", name: "bio2", widget: "text" }

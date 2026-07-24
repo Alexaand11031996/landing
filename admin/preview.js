@@ -37,10 +37,21 @@
     );
   }
 
-  function renderMaster(entry) {
+  function renderMaster(entry, getAsset) {
+    var photo = get(entry, ['master', 'photo'], '');
+    var photoUrl = '';
+    if (photo) {
+      try {
+        var asset = getAsset(photo);
+        if (asset) photoUrl = asset.toString();
+      } catch (e) {}
+    }
     return h('div', { className: 'p-section' },
       h('div', { className: 'p-section-title' }, 'Майстер'),
       h('div', { className: 'p-master' },
+        photoUrl
+          ? h('div', { className: 'p-master-photo' }, h('img', { src: photoUrl, alt: '' }))
+          : h('div', { className: 'p-master-photo img-missing' }),
         h('div', {},
           h('h2', {}, get(entry, ['master', 'name'], '')),
           h('p', {}, get(entry, ['master', 'bio1'], '')),
@@ -162,7 +173,7 @@
 
       return h('div', { className: 'preview-root', style: themeVars(entry) },
         renderHero(entry),
-        renderMaster(entry),
+        renderMaster(entry, getAsset),
         renderStyles(getList(entry, ['styles'])),
         renderProcess(getList(entry, ['process'])),
         renderGallery(getList(entry, ['gallery']), getAsset),

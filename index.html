@@ -386,7 +386,7 @@
     <div class="wrap master">
       <div class="master-frame reveal">
         <div class="corner tl"></div><div class="corner br"></div>
-        <img src="images/master-at-work.jpg" alt="Анатолій Кармазін працює над татуюванням у студії Karmazin Tattoo">
+        <img id="master-photo" src="images/master-at-work.jpg" alt="Анатолій Кармазін працює над татуюванням у студії Karmazin Tattoo">
       </div>
       <div class="master-bio reveal">
         <div class="eyebrow">Майстер</div>
@@ -555,7 +555,7 @@ async function loadSiteContent(){
   const C = await loadSiteContent();
 
   const seo = C.seo || {};
-  const fallbackImage = 'https://karmazin.space/images/master-at-work.jpg';
+  const fallbackImage = 'https://karmazin.space/' + (C.master.photo || 'images/master-at-work.jpg');
   document.title = seo.title || 'Karmazin Tattoo Studio';
   document.getElementById('meta-description').content = seo.description || '';
   document.getElementById('meta-robots').content = seo.robots || 'index, follow';
@@ -604,6 +604,7 @@ async function loadSiteContent(){
   document.getElementById('hero-stamp').innerHTML =
     `${escapeHtml(C.hero.stampSmall)}<span class="big">${escapeHtml(C.hero.stampBig)}</span>${escapeHtml(C.hero.stampBottom)}`;
 
+  document.getElementById('master-photo').src = C.master.photo || 'images/master-at-work.jpg';
   document.getElementById('master-name').textContent = C.master.name;
   document.getElementById('master-bio1').textContent = C.master.bio1;
   document.getElementById('master-bio2').textContent = C.master.bio2;
