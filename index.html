@@ -542,7 +542,7 @@
 async function loadSiteContent(){
   const embedded = document.getElementById('site-content-data');
   if(embedded && embedded.textContent.trim()){
-    try{ return JSON.parse(embedded.textContent); }catch(e){}
+    try{ return { data: JSON.parse(embedded.textContent), fromEmbedded: true }; }catch(e){}
   }
   let content = JSON.parse(JSON.stringify(DEFAULT_CONTENT));
   try{
@@ -552,11 +552,11 @@ async function loadSiteContent(){
       content = deepMerge(DEFAULT_CONTENT, data);
     }
   }catch(e){}
-  return content;
+  return { data: content, fromEmbedded: false };
 }
 
 (async () => {
-  const C = await loadSiteContent();
+  const { data: C, fromEmbedded } = await loadSiteContent();
 
   const seo = C.seo || {};
   const fallbackImage = 'https://karmazin.space/' + (C.master.photo || 'images/master-at-work.jpg');
@@ -620,13 +620,13 @@ async function loadSiteContent(){
   document.getElementById('stat3-label').textContent = C.master.stat3Label;
 
   const stylesGrid = document.getElementById('styles-grid');
-  stylesGrid.innerHTML = C.styles.map(renderStyleCard).join('');
+  if (!fromEmbedded) stylesGrid.innerHTML = C.styles.map(renderStyleCard).join('');
 
   const processList = document.getElementById('process-list');
-  processList.innerHTML = C.process.map(renderProcessItem).join('');
+  if (!fromEmbedded) processList.innerHTML = C.process.map(renderProcessItem).join('');
 
   const galleryGrid = document.getElementById('gallery-grid');
-  galleryGrid.innerHTML = C.gallery.map(renderGalleryCell).join('');
+  if (!fromEmbedded) galleryGrid.innerHTML = C.gallery.map(renderGalleryCell).join('');
   galleryGrid.querySelectorAll('.gallery-cell').forEach((el, i) => el.addEventListener('click', () => openLightbox(i)));
 
   const lightbox = document.getElementById('lightbox');
@@ -711,7 +711,7 @@ async function loadSiteContent(){
 
   document.getElementById('pricing-note').textContent = C.pricing.note;
   const pricingGrid = document.getElementById('pricing-grid');
-  pricingGrid.innerHTML = C.pricing.items.map(renderPriceCard).join('');
+  if (!fromEmbedded) pricingGrid.innerHTML = C.pricing.items.map(renderPriceCard).join('');
 
   document.getElementById('contact-heading').textContent = C.contact.heading;
   document.getElementById('contact-text').textContent = C.contact.text;
