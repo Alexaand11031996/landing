@@ -5,22 +5,51 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, follow">
 <title>Політика конфіденційності — Karmazin Tattoo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{ --void:#0d0c0e; --ink:#17161a; --bone:#e7dcc9; --bone-dim:#b8ac97; --crimson-bright:#b23155; --line: rgba(231,220,201,0.14); }
-  *{ box-sizing:border-box; }
-  body{ margin:0; background:var(--void); color:var(--bone); font-family:'Inter',Arial,sans-serif; line-height:1.6; }
-  .wrap{ max-width:720px; margin:0 auto; padding:60px 24px 80px; }
-  h1{ font-size:28px; margin-bottom:28px; }
-  h2{ font-size:18px; margin:32px 0 10px; color:var(--crimson-bright); }
+  :root{
+    --void:#0d0c0e; --ink:#17161a; --bone:#e7dcc9; --bone-dim:#b8ac97;
+    --crimson:#8b1e3f; --crimson-bright:#b23155; --smoke:#6e6a63; --line: rgba(231,220,201,0.14);
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{
+    background:var(--void); color:var(--bone); font-family:'Inter',sans-serif; line-height:1.6;
+    background-image:
+      radial-gradient(circle at 15% 10%, color-mix(in srgb, var(--crimson) 14%, transparent), transparent 45%),
+      radial-gradient(circle at 85% 90%, color-mix(in srgb, var(--crimson) 11%, transparent), transparent 40%);
+  }
+  a{ color:inherit; text-decoration:none; }
+  header{ border-bottom:1px solid var(--line); }
+  .brand-row{ max-width:720px; margin:0 auto; padding:20px 24px; }
+  .brand{ font-family:'Oswald', sans-serif; font-weight:700; letter-spacing:.06em; font-size:18px; text-transform:uppercase; display:inline-flex; align-items:center; gap:10px; }
+  .brand .dot{ width:8px; height:8px; border-radius:50%; background:var(--crimson-bright); box-shadow:0 0 10px var(--crimson-bright); }
+  .wrap{ max-width:720px; margin:0 auto; padding:56px 24px 80px; }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--crimson-bright); display:flex; align-items:center; gap:10px; margin-bottom:18px;
+  }
+  .eyebrow::before{ content:""; width:22px; height:1px; background:var(--crimson-bright); display:inline-block; }
+  h1{ font-family:'Oswald', sans-serif; text-transform:uppercase; font-weight:600; font-size:clamp(26px,4vw,36px); margin-bottom:26px; }
+  h2{ font-family:'Oswald', sans-serif; text-transform:uppercase; font-weight:500; font-size:16px; letter-spacing:.02em; margin:32px 0 10px; color:var(--crimson-bright); }
   p, li{ color:var(--bone-dim); font-size:15px; }
-  ul{ padding-left:20px; }
-  a{ color:var(--crimson-bright); }
-  .back{ display:inline-block; margin-bottom:24px; font-size:14px; }
+  ul{ padding-left:20px; margin-top:6px; }
+  li{ margin-bottom:4px; }
+  strong{ color:var(--bone); }
+  .content a{ color:var(--crimson-bright); text-decoration:underline; }
+  footer{ padding:40px 0; text-align:center; color:var(--smoke); font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:.04em; border-top:1px solid var(--line); }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <a class="back" href="/">← На головну</a>
+  <header>
+    <div class="brand-row">
+      <a class="brand" href="/"><span class="dot"></span>Karmazin Tattoo</a>
+    </div>
+  </header>
+
+  <div class="wrap content">
+    <div class="eyebrow">Правова інформація</div>
     <h1>Політика конфіденційності</h1>
 
     <p>Ця сторінка пояснює, які дані збирає форма запису на сайті Karmazin Tattoo (karmazin.space) і як вони використовуються.</p>
@@ -51,5 +80,7 @@
     <h2>Ваші права</h2>
     <p>Ви можете попросити уточнити, виправити або видалити свої дані — напишіть про це в Instagram або зателефонуйте за контактами, вказаними на сайті.</p>
   </div>
+
+  <footer>KARMAZIN TATTOO — <a href="/">← На головну</a></footer>
 </body>
 </html>

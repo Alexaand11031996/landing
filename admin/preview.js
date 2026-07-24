@@ -126,12 +126,23 @@
   }
 
   function renderContact(entry) {
+    var igLabel = get(entry, ['contactButtons', 'instagramLabel'], '');
+    var viberUrl = get(entry, ['contactButtons', 'viberUrl'], '');
+    var viberLabel = get(entry, ['contactButtons', 'viberLabel'], '') || 'Viber';
+    var telegramUrl = get(entry, ['contactButtons', 'telegramUrl'], '');
+    var telegramLabel = get(entry, ['contactButtons', 'telegramLabel'], '') || 'Telegram';
+
+    var buttons = [h('span', { className: 'p-btn primary', key: 'ig' }, igLabel)];
+    buttons.push(h('span', { className: 'p-btn', key: 'booking' }, 'Записатися'));
+    if (viberUrl) buttons.push(h('span', { className: 'p-btn', key: 'vb' }, viberLabel));
+    if (telegramUrl) buttons.push(h('span', { className: 'p-btn', key: 'tg' }, telegramLabel));
+
     return h('div', { className: 'p-section' },
       h('div', { className: 'p-section-title' }, 'Блок запису'),
       h('div', { className: 'p-contact' },
         h('h2', {}, get(entry, ['contact', 'heading'], '')),
         h('p', {}, get(entry, ['contact', 'text'], '')),
-        h('span', { className: 'p-btn primary' }, get(entry, ['contact', 'ctaPrimary'], '')),
+        h('div', { style: { display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '14px' } }, buttons),
         h('div', { style: { marginTop: '20px' } },
           h('div', { className: 'p-contact-row' }, h('span', {}, 'Місто'), h('span', {}, get(entry, ['contact', 'city'], ''))),
           h('div', { className: 'p-contact-row' }, h('span', {}, 'Адреса'), h('span', {}, get(entry, ['booking', 'address'], ''))),
