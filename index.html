@@ -102,6 +102,8 @@
   .hero h1 em{ font-style:normal; color:var(--crimson-bright);}
   .hero p.lead{ font-size:17px; color:var(--bone-dim); max-width:460px; margin-bottom:34px;}
   .cta-row{display:flex; gap:16px; flex-wrap:wrap;}
+  .contact .cta-row{ gap:10px; }
+  .contact .cta-row .btn{ padding:14px 18px; }
   .btn{
     display:inline-flex; align-items:center; gap:10px; font-family:'JetBrains Mono', monospace;
     font-size:13px; letter-spacing:.04em; padding:15px 26px; border:1px solid var(--bone);
@@ -701,12 +703,16 @@ async function loadSiteContent(){
   document.getElementById('contact-heading').textContent = C.contact.heading;
   document.getElementById('contact-text').textContent = C.contact.text;
   const contactCta = document.getElementById('contact-cta');
-  contactCta.textContent = C.contact.ctaPrimary;
-  contactCta.href = C.instagramUrl;
+  contactCta.textContent = C.contactCtaLabel || '';
+  contactCta.href = C.contactCtaUrl || C.instagramUrl;
   const viberCta = document.getElementById('contact-cta-viber');
   if (C.viberUrl) { viberCta.href = C.viberUrl; viberCta.style.display = ''; }
   const telegramCta = document.getElementById('contact-cta-telegram');
-  if (C.telegramUrl) { telegramCta.href = C.telegramUrl; telegramCta.style.display = ''; }
+  if (C.telegramUrl) {
+    const tgUrl = /^https?:\/\//i.test(C.telegramUrl) ? C.telegramUrl : 'https://t.me/' + C.telegramUrl.replace(/^@/, '');
+    telegramCta.href = tgUrl;
+    telegramCta.style.display = '';
+  }
   document.getElementById('contact-city').textContent = C.contact.city;
   document.getElementById('contact-address').textContent = C.booking?.address || '';
   document.getElementById('contact-workhours').textContent = C.booking?.workHours || '';

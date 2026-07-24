@@ -2,7 +2,6 @@
   "contact": {
     "heading": "Готові обговорити ескіз?",
     "text": "Найшвидше — написати напряму в Instagram: там же можна переглянути портфоліо моїх робіт",
-    "ctaPrimary": "@karmazin_tattoo →",
     "city": "Вільногірськ",
     "format": "За попереднім записом",
     "channel": "Instagram Direct",
@@ -180,5 +179,7 @@
     "canonicalUrl": "https://karmazin.space/",
     "description": "Karmazin Tattoo Spase — тату-простір у Вільногірську. Авторські ескізи, запис на сеанс, перекриття старих тату, роботи в різних стилях."
   },
-  "instagramUrl": "https://www.instagram.com/karmazin_tattoo/"
+  "instagramUrl": "https://www.instagram.com/karmazin_tattoo/",
+  "contactCtaLabel": "@karmazin_tattoo →",
+  "contactCtaUrl": "https://www.instagram.com/karmazin_tattoo/"
 }

@@ -68,7 +68,6 @@ const DEFAULT_CONTENT = {
   contact: {
     heading: "Готові обговорити ескіз?",
     text: "Найшвидше — написати напряму в Instagram: там же портфоліо, щоб одразу показати, що подобається, і обговорити зону, розмір та дату.",
-    ctaPrimary: "@karmazin_tattoo →",
     city: "Вільногірськ",
     format: "За попереднім записом",
     channel: "Instagram Direct",
@@ -79,6 +78,8 @@ const DEFAULT_CONTENT = {
     workHours: "Пн–Пт: 10:00–19:00"
   },
   instagramUrl: "https://www.instagram.com/karmazin_tattoo/",
+  contactCtaLabel: "@karmazin_tattoo →",
+  contactCtaUrl: "https://www.instagram.com/karmazin_tattoo/",
   viberUrl: "",
   telegramUrl: "",
   phone: "+380 50 123 45 67",
