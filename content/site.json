@@ -7,6 +7,14 @@
     "channel": "Instagram Direct",
     "sketch": "Узгоджується до сеансу"
   },
+  "contactButtons": {
+    "instagramLabel": "instagram",
+    "instagramUrl": "https://www.instagram.com/karmazin_tattoo/",
+    "viberLabel": "Viber",
+    "viberUrl": "viber://chat?number=%2B380507338644",
+    "telegramLabel": "Telegram",
+    "telegramUrl": "@karmazin_tattoo"
+  },
   "styles": [
     {
       "title": "чорно-біла графіка",
@@ -28,6 +36,7 @@
     "stat1Num": "1219",
     "bio2": "Перед сеансом — дзвінок або переписка в Instagram: узгоджуємо розмір, зону нанесення та правки ескізу. Жодних тату «з ходу» без попередньо затвердження дизайну.",
     "name": "Анатолій Кармазін",
+    "photo": "images/710813028_18051094595768713_1563054027126331283_n.jpg",
     "stat3Label": "ескіз узгоджується заздалегідь",
     "stat2Label": "публікацій — реальні роботи",
     "stat1Label": "підписників в Instagram"
@@ -177,13 +186,5 @@
     "canonicalUrl": "https://karmazin.space/",
     "description": "Karmazin Tattoo Spase — тату-простір у Вільногірську. Авторські ескізи, запис на сеанс, перекриття старих тату, роботи в різних стилях."
   },
-  "instagramUrl": "https://www.instagram.com/karmazin_tattoo/",
-  "contactButtons": {
-    "instagramLabel": "instagram",
-    "instagramUrl": "https://www.instagram.com/karmazin_tattoo/",
-    "viberLabel": "Viber",
-    "viberUrl": "viber://chat?number=%2B380507338644",
-    "telegramLabel": "Telegram",
-    "telegramUrl": "@karmazin_tattoo"
-  }
+  "instagramUrl": "https://www.instagram.com/karmazin_tattoo/"
 }
