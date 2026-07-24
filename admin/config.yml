@@ -13,11 +13,19 @@ collections:
         label: "Весь контент сайту"
         file: "content/site.json"
         fields:
-          - { label: "Посилання на Instagram", name: "instagramUrl", widget: "string", hint: "Приклад: https://www.instagram.com/karmazin_tattoo/" }
-          - { label: "Кнопка запису — назва", name: "contactCtaLabel", widget: "string", hint: "Приклад: @karmazin_tattoo →" }
-          - { label: "Кнопка запису — посилання", name: "contactCtaUrl", widget: "string", hint: "Приклад: https://www.instagram.com/karmazin_tattoo/" }
-          - { label: "Посилання на Viber", name: "viberUrl", widget: "string", required: false, hint: "Приклад: viber://chat?number=%2B380507338644. Якщо залишити порожнім — кнопка Viber на сайті не показується." }
-          - { label: "Посилання на Telegram", name: "telegramUrl", widget: "string", required: false, hint: "Приклад: https://t.me/karmazin_tattoo (або просто @karmazin_tattoo — сайт сам перетворить на посилання). Якщо залишити порожнім — кнопка Telegram на сайті не показується." }
+          - { label: "Instagram (посилання для шапки сайту, головного екрану і фото в галереї)", name: "instagramUrl", widget: "string", hint: "Приклад: https://www.instagram.com/karmazin_tattoo/" }
+
+          - label: "Кнопки в блоці «Готові обговорити ескіз?» (внизу сторінки, біля форми запису)"
+            name: "contactButtons"
+            widget: "object"
+            fields:
+              - { label: "Instagram — назва кнопки", name: "instagramLabel", widget: "string", hint: "Приклад: @karmazin_tattoo →" }
+              - { label: "Instagram — посилання", name: "instagramUrl", widget: "string", hint: "Приклад: https://www.instagram.com/karmazin_tattoo/" }
+              - { label: "Viber — назва кнопки", name: "viberLabel", widget: "string", required: false, hint: "Приклад: Viber" }
+              - { label: "Viber — посилання", name: "viberUrl", widget: "string", required: false, hint: "Приклад: viber://chat?number=%2B380507338644. Порожнє поле — кнопка Viber на сайті не показується." }
+              - { label: "Telegram — назва кнопки", name: "telegramLabel", widget: "string", required: false, hint: "Приклад: Telegram" }
+              - { label: "Telegram — посилання", name: "telegramUrl", widget: "string", required: false, hint: "Приклад: https://t.me/karmazin_tattoo (або просто @karmazin_tattoo — сайт сам перетворить на посилання). Порожнє поле — кнопка Telegram на сайті не показується." }
+
           - { label: "Номер телефону (в шапці сайту)", name: "phone", widget: "string" }
 
           - label: "SEO"

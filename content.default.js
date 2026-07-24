@@ -78,10 +78,14 @@ const DEFAULT_CONTENT = {
     workHours: "Пн–Пт: 10:00–19:00"
   },
   instagramUrl: "https://www.instagram.com/karmazin_tattoo/",
-  contactCtaLabel: "@karmazin_tattoo →",
-  contactCtaUrl: "https://www.instagram.com/karmazin_tattoo/",
-  viberUrl: "",
-  telegramUrl: "",
+  contactButtons: {
+    instagramLabel: "@karmazin_tattoo →",
+    instagramUrl: "https://www.instagram.com/karmazin_tattoo/",
+    viberLabel: "Viber",
+    viberUrl: "",
+    telegramLabel: "Telegram",
+    telegramUrl: ""
+  },
   phone: "+380 50 123 45 67",
   footer: "KARMAZIN TATTOO — ВІЛЬНОГІРСЬК · ЗРОБЛЕНО НА ЗАМОВЛЕННЯ, НЕ ЗА ШАБЛОНОМ",
   theme: {

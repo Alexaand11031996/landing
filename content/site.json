@@ -32,7 +32,6 @@
     "stat2Label": "публікацій — реальні роботи",
     "stat1Label": "підписників в Instagram"
   },
-  "contactCtaLabel": "instagram",
   "pricing": {
     "note": "Мінімальна вартість татуювання 30$\nВартість повного сеансу (6 годин) 160$\nДізнатись вартість свого татуювання можна після консультаціі в переписці, або очно (консультація безкоштовна)",
     "items": [
@@ -65,7 +64,6 @@
     "crimsonBright": "#006666",
     "bone": "#e7dcc9"
   },
-  "telegramUrl": "@karmazin_tattoo",
   "phone": "+380507338644",
   "process": [
     {
@@ -147,7 +145,6 @@
       "caption": "лайнворк"
     }
   ],
-  "viberUrl": "viber://chat?number=%2B380507338644",
   "booking": {
     "address": "Вільногірськ, Україна",
     "workHours": "Пн-Нд: 11:00–20:00"
@@ -181,5 +178,12 @@
     "description": "Karmazin Tattoo Spase — тату-простір у Вільногірську. Авторські ескізи, запис на сеанс, перекриття старих тату, роботи в різних стилях."
   },
   "instagramUrl": "https://www.instagram.com/karmazin_tattoo/",
-  "contactCtaUrl": "https://www.instagram.com/karmazin_tattoo/"
+  "contactButtons": {
+    "instagramLabel": "instagram",
+    "instagramUrl": "https://www.instagram.com/karmazin_tattoo/",
+    "viberLabel": "Viber",
+    "viberUrl": "viber://chat?number=%2B380507338644",
+    "telegramLabel": "Telegram",
+    "telegramUrl": "@karmazin_tattoo"
+  }
 }

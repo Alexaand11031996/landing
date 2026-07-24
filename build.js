@@ -31,10 +31,13 @@ function normalizeTelegramUrl(value) {
   return 'https://t.me/' + v.replace(/^@/, '');
 }
 
-function setOptionalLink(html, id, url) {
+function setOptionalLink(html, id, url, label) {
   if (url && String(url).trim()) {
     html = setAttr(html, id, 'href', url);
     html = setAttr(html, id, 'style', '');
+    if (label && String(label).trim()) {
+      html = setInner(html, id, escapeHtml(label));
+    }
   }
   return html;
 }
@@ -219,10 +222,11 @@ async function build() {
 
   html = setInner(html, 'contact-heading', escapeHtml(C.contact.heading));
   html = setInner(html, 'contact-text', escapeHtml(C.contact.text));
-  html = setAttr(html, 'contact-cta', 'href', C.contactCtaUrl || C.instagramUrl);
-  html = setInner(html, 'contact-cta', escapeHtml(C.contactCtaLabel || ''));
-  html = setOptionalLink(html, 'contact-cta-viber', C.viberUrl);
-  html = setOptionalLink(html, 'contact-cta-telegram', normalizeTelegramUrl(C.telegramUrl));
+  const cb = C.contactButtons || {};
+  html = setAttr(html, 'contact-cta', 'href', cb.instagramUrl || C.instagramUrl);
+  html = setInner(html, 'contact-cta', escapeHtml(cb.instagramLabel || ''));
+  html = setOptionalLink(html, 'contact-cta-viber', cb.viberUrl, cb.viberLabel);
+  html = setOptionalLink(html, 'contact-cta-telegram', normalizeTelegramUrl(cb.telegramUrl), cb.telegramLabel);
   html = setInner(html, 'contact-city', escapeHtml(C.contact.city));
   html = setInner(html, 'contact-address', escapeHtml((C.booking && C.booking.address) || ''));
   html = setInner(html, 'contact-workhours', escapeHtml((C.booking && C.booking.workHours) || ''));

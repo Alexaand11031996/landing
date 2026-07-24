@@ -710,15 +710,21 @@ async function loadSiteContent(){
 
   document.getElementById('contact-heading').textContent = C.contact.heading;
   document.getElementById('contact-text').textContent = C.contact.text;
+  const cb = C.contactButtons || {};
   const contactCta = document.getElementById('contact-cta');
-  contactCta.textContent = C.contactCtaLabel || '';
-  contactCta.href = C.contactCtaUrl || C.instagramUrl;
+  contactCta.textContent = cb.instagramLabel || '';
+  contactCta.href = cb.instagramUrl || C.instagramUrl;
   const viberCta = document.getElementById('contact-cta-viber');
-  if (C.viberUrl) { viberCta.href = C.viberUrl; viberCta.style.display = ''; }
+  if (cb.viberUrl) {
+    viberCta.href = cb.viberUrl;
+    viberCta.textContent = cb.viberLabel || 'Viber';
+    viberCta.style.display = '';
+  }
   const telegramCta = document.getElementById('contact-cta-telegram');
-  if (C.telegramUrl) {
-    const tgUrl = /^https?:\/\//i.test(C.telegramUrl) ? C.telegramUrl : 'https://t.me/' + C.telegramUrl.replace(/^@/, '');
+  if (cb.telegramUrl) {
+    const tgUrl = /^https?:\/\//i.test(cb.telegramUrl) ? cb.telegramUrl : 'https://t.me/' + cb.telegramUrl.replace(/^@/, '');
     telegramCta.href = tgUrl;
+    telegramCta.textContent = cb.telegramLabel || 'Telegram';
     telegramCta.style.display = '';
   }
   document.getElementById('contact-city').textContent = C.contact.city;
