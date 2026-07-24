@@ -31,6 +31,13 @@ function normalizeTelegramUrl(value) {
   return 'https://t.me/' + v.replace(/^@/, '');
 }
 
+function setRootVar(html, varName, defaultValue, newValue) {
+  if (!newValue) return html;
+  const re = new RegExp('(--' + varName + ':)' + defaultValue.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ';');
+  if (!re.test(html)) throw new Error('setRootVar: default value not found for --' + varName);
+  return html.replace(re, '$1' + newValue + ';');
+}
+
 function setOptionalLink(html, id, url, label) {
   if (url && String(url).trim()) {
     html = setAttr(html, id, 'href', url);
@@ -160,6 +167,13 @@ async function build() {
   await optimizeImages(C);
 
   let html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+
+  const theme = C.theme || {};
+  html = setRootVar(html, 'void', '#0d0c0e', theme.void);
+  html = setRootVar(html, 'ink', '#17161a', theme.ink);
+  html = setRootVar(html, 'crimson', '#8b1e3f', theme.crimson);
+  html = setRootVar(html, 'crimson-bright', '#b23155', theme.crimsonBright);
+  html = setRootVar(html, 'bone', '#e7dcc9', theme.bone);
 
   const embeddedJson = JSON.stringify(C).replace(/</g, '\\u003c');
   html = html.replace(
